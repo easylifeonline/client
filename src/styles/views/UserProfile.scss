@@ -1,0 +1,88 @@
+// src/styles/views/UserProfile.scss
+
+.user-profile-container {
+    max-width: 800px; // Set a maximum width for the profile container
+    margin: 40px auto; // Center the container with auto margin and some top margin
+    padding: 20px;
+    background-color: #f5f5f5; // Light background color
+    border-radius: 10px; // Rounded corners
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+  
+    // Add space between the "Our Services" and the "User Profile"
+    margin-top: 100px; // Adjust this value to control the space between sections
+  
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 1.8rem;
+      text-align: center; // Center the heading
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; // Space between form elements
+  
+      label {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 5px;
+      }
+  
+      input[type="text"],
+      input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        color: #333;
+  
+        &:focus {
+          outline: none;
+          border-color: #4CAF50; // Green border on focus
+        }
+      }
+  
+      input[type="file"] {
+        padding: 5px; // Adjust padding for file input
+      }
+  
+      button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50; // Green background for button
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+  
+        &:hover {
+          background-color: #45a049; // Slightly darker green on hover
+        }
+      }
+    }
+  
+    h3 {
+      margin-top: 40px;
+      color: #333;
+      font-size: 1.5rem;
+      text-align: center; // Center the subheading
+    }
+  
+    .user-addresses-container {
+      margin-top: 20px; // Space above the addresses section
+      padding: 10px;
+      background-color: #e9ecef; // Light grey background for addresses section
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+    }
+  }
+  
+  // Additional styles for OurServices component for more space between sections
+  .our-services + .user-profile-container {
+    margin-top: 100px; // Add space below the "Our Services" section
+  }
+  
+  

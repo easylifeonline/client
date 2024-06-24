@@ -1,0 +1,185 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px; // Matches the height specified in the component props
+  padding-left: 20px; // Consistent spacing on the left
+  padding-right: 20px; // Adjusted padding on the right to avoid items being too close to the edge
+  background-color: #4CAF50; // Nicer green background color for the header
+  color: #fff; // White text color
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+  z-index: 1000; // Ensures the header is above other content
+  white-space: nowrap; // Prevent content from wrapping
+
+  .title {
+    font-weight: bold;
+    font-size: 24px;
+    color: #fff; // Title color
+    flex-shrink: 0; // Prevent shrinking
+  }
+
+  .middle-section {
+    // Kept the same as the previous solution to avoid repeating
+    display: flex;
+    align-items: center;
+    position: relative; // Necessary for absolute positioning of dropdown
+
+    .nav-item {
+      position: relative; // Necessary for dropdown positioning
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 15px;
+      padding: 10px 15px;
+      text-decoration: none;
+      text-transform: none;
+      flex-shrink: 0;
+
+      &:hover {
+        background-color: #388E3C; // Green hover color
+      }
+
+      .dropdown-content {
+        display: none; // Hidden by default
+        position: absolute; // Position relative to parent
+        top: 100%; // Positioned just below the nav item
+        left: 0; // Align to the left edge of the parent
+        background-color: #555; // Darker background for dropdown
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 2000; // High z-index to ensure it appears above other content
+        min-width: 200px; // Ensure a minimum width for dropdown
+        pointer-events: auto; // Ensure it can receive pointer events
+
+        span {
+          display: block;
+          color: #fff;
+          padding: 8px 10px;
+          cursor: pointer;
+          text-decoration: none;
+
+          &:hover {
+            background-color: #666; // Slightly lighter color on hover
+          }
+        }
+      }
+
+      &:hover .dropdown-content {
+        display: block; // Show dropdown on hover
+      }
+    }
+  }
+
+  .right-section {
+    display: flex;
+    align-items: center;
+
+    .nav-item {
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 15px;
+      padding: 10px 15px; // Standard padding for clickable appearance
+      text-decoration: none;
+      text-transform: none;
+      flex-shrink: 0;
+
+      &:hover {
+        background-color: #388E3C; // Green hover color
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 40px; // Add margin to the right of the last nav-item to push it away from the screen edge
+      }
+    }
+
+    .profile-dropdown {
+      position: relative;
+
+      .profile-button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        margin-left: 15px; // Space between the profile/login button and other items
+        padding: 50px; // Standard padding
+        flex-shrink: 0; // Prevent shrinking
+        position: relative; // Necessary for positioning the hover effect
+
+        &:hover {
+          // Create a circular hover effect of the same size as the profile picture
+          background-color: rgba(56, 142, 60, 0.8); // Green color with transparency
+          border-radius: 50%; // Ensure the hover effect is a circle
+        }
+
+        &:hover::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 40px; // Same size as the profile picture
+          height: 40px; // Same size as the profile picture
+          border-radius: 50%; // Make it a circle
+          background-color: rgba(56, 142, 60, 0.8); // Semi-transparent green background
+          z-index: -1; // Place it behind the profile picture
+        }
+      }
+
+      .profile-picture {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0; // Prevent shrinking
+      }
+
+      .dropdown-content {
+        display: none; // Hidden by default
+        position: absolute; // Position relative to the parent
+        top: 100%; // Positioned just below the profile button
+        right: 0; // Align to the right edge of the parent
+        background-color: #555; // Slightly darker background for dropdown
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 2000; // High z-index to ensure it appears above other content
+        min-width: 200px; // Ensure a minimum width for dropdown
+        pointer-events: auto; // Ensure it can receive pointer events
+
+        span {
+          display: block;
+          color: #fff;
+          padding: 8px 10px;
+          cursor: pointer;
+          text-decoration: none;
+
+          &:hover {
+            background-color: #666; // Slightly lighter color on hover
+          }
+        }
+      }
+
+      // Display dropdown when button is active
+      .profile-button:hover + .dropdown-content,
+      .dropdown-content:hover {
+        display: block;
+      }
+    }
+  }
+}
+
+
+
+
+
+
