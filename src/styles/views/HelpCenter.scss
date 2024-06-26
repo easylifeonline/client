@@ -1,0 +1,46 @@
+.help-center-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 135px;
+  
+    h2, h3 {
+      color: #333;
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        margin-bottom: 10px;
+        color: #555;
+  
+        strong {
+          color: #333;
+        }
+      }
+    }
+  
+    @media (max-width: 768px) {
+      padding: 10px;
+  
+      h2 {
+        font-size: 20px;
+      }
+  
+      h3 {
+        font-size: 18px;
+      }
+  
+      ul {
+        li {
+          font-size: 14px;
+        }
+      }
+    }
+  }  

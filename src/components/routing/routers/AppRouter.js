@@ -21,6 +21,14 @@ import AddProduct from "../../AddProduct";
 import InventoryManagement from "../../InventoryManagement";
 import AdminDashboard from "../../AdminDashboard";
 import ProductDetail from "../../ProductDetail";
+import Contact from "../../Contact";
+import ContactForm from "../../ContactForm";
+import VendorContactForm from "../../VendorContactForm";
+import About from "../../About";
+import FAQs from "../../FAQs";
+import TermsOfService from "../../TermsOfService";
+import HelpCenter from "../../HelpCenter";
+import Vendor from "../../Vendor";
 
 const AppRouter = () => {
   return (
@@ -41,6 +49,62 @@ const AppRouter = () => {
             path="/home"
             element={
                 <Home />
+            }
+          />
+
+          <Route
+            path="/contact"
+            element={
+                <Contact />
+            }
+          />
+
+          <Route
+            path="/contact-form"
+            element={
+                <ContactForm />
+            }
+          />
+
+          <Route
+            path="/vendor-contact-form"
+            element={
+                <VendorContactForm />
+            }
+          />
+
+          <Route
+            path="/vendor"
+            element={
+                <Vendor />
+            }
+          />
+
+          <Route
+            path="/about"
+            element={
+                <About />
+            }
+          />
+
+          <Route
+            path="/faqs"
+            element={
+                <FAQs />
+            }
+          />
+
+          <Route
+            path="/terms"
+            element={
+                <TermsOfService />
+            }
+          />
+
+          <Route
+            path="/helpcenter"
+            element={
+                <HelpCenter />
             }
           />
           

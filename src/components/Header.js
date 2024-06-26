@@ -120,6 +120,12 @@ const Header = ({ height }) => {
             </div>
           </div>
         )}
+        {(!user || (user && user.role === "customer")) && (
+          <>
+            <span className="nav-item" onClick={() => navigate("/contact")}>Contact</span>
+            <span className="nav-item" onClick={() => navigate("/vendor")}>Become a Vendor</span>
+          </>
+        )}
       </div>
       <div className="right-section">
         {user ? (
@@ -162,5 +168,4 @@ const Header = ({ height }) => {
 };
 
 export default Header;
-
 
