@@ -1,5 +1,3 @@
-// ProductList.js
-
 import React, { useEffect, useState } from 'react';
 import api from '../helpers/api'; 
 import { useUser } from './UserContext';
@@ -14,7 +12,12 @@ const ProductList = () => {
     const fetchProducts = async () => {
       if (user && user.username) {
         try {
-          const response = await api.get('products/');
+          const response = await api.get('products/', {
+            params: { vendor: user.username },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('access_token')}`
+            }
+          });
           setProducts(response.data);
         } catch (error) {
           console.error("Error fetching products:", error);

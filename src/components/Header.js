@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../helpers/api";
 import "../styles/views/Header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +22,7 @@ const Header = ({ height }) => {
 
       if (token) {
         try {
-          const response = await axios.get("http://localhost:8000/api/profile/", {
+          const response = await api.get("profile/", {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -49,7 +49,7 @@ const Header = ({ height }) => {
     try {
       const token = localStorage.getItem("access_token");
 
-      await axios.post("http://localhost:8000/api/logout/", null, {
+      await api.post("logout/", null, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -105,7 +105,7 @@ const Header = ({ height }) => {
           <div className="nav-item">
             Profiles Management
             <div className="dropdown-content">
-              <span onClick={() => navigate("/admin/profiles")}>View All Profiles</span>
+              <span onClick={() => navigate("/admin/dashboard")}>View All Profiles</span>
               <span onClick={() => navigate("/admin/create-profile")}>Create New Profile</span>
             </div>
           </div>

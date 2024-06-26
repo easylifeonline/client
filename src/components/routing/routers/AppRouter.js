@@ -19,6 +19,8 @@ import NotFound from "../../NotFound";
 import ProductList from "../../ProductList";
 import AddProduct from "../../AddProduct";
 import InventoryManagement from "../../InventoryManagement";
+import AdminDashboard from "../../AdminDashboard";
+import ProductDetail from "../../ProductDetail";
 
 const AppRouter = () => {
   return (
@@ -38,11 +40,10 @@ const AppRouter = () => {
           <Route
             path="/home"
             element={
-            <ProtectedRoute>
                 <Home />
-            </ProtectedRoute>
             }
           />
+          
           <Route
             path="/addresses"
             element={
@@ -81,6 +82,18 @@ const AppRouter = () => {
                 path="/vendor/inventory"
                 element={
                     <InventoryManagement />
+                }
+            />
+            <Route
+                path="/admin/dashboard"
+                element={
+                    <AdminDashboard />
+                }
+            />
+            <Route
+                path="/products/:id"
+                element={
+                    <ProductDetail />
                 }
             />
         </Routes>

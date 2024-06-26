@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from "../helpers/api";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from './UserContext';
 import '../styles/views/AddProduct.scss';
@@ -26,7 +26,7 @@ const AddProduct = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/categories/');
+        const response = await api.get('categories/');
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -76,7 +76,7 @@ const AddProduct = () => {
         throw new Error('No authentication token found');
       }
 
-      const response = await axios.post('http://localhost:8000/api/products/', productData, {
+      const response = await api.post('products/', productData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`

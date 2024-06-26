@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import api from "../helpers/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons"; // Correct package for solid icons
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import "../styles/views/Footer.scss";
+import Popup from './SubPopup';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [popupMessage, setPopupMessage] = useState('');
+  const [popupTitle, setPopupTitle] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await api.post('subscribe/', { email });
+      setPopupTitle('Success');
+      setPopupMessage('Thank you for subscribing!');
+    } catch (error) {
+      setPopupTitle('Error');
+      if (error.response && error.response.data && error.response.data.email) {
+        setPopupMessage(error.response.data.email[0]);
+      } else {
+        setPopupMessage('Failed to subscribe. Please try again.');
+      }
+    } finally {
+      setShowPopup(true);
+    }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupMessage('');
+  };
+
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -46,12 +76,14 @@ const Footer = () => {
         <div className="footer-section newsletter">
           <h2>Newsletter Signup</h2>
           <p>Subscribe to our newsletter to stay updated with our latest news and offers.</p>
-          <form className="newsletter-form">
+          <form className="newsletter-form" onSubmit={handleSubscribe}>
             <input
               type="email"
               placeholder="Enter your email address"
               aria-label="Email Address"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <button type="submit">Subscribe</button>
           </form>
@@ -60,8 +92,10 @@ const Footer = () => {
       <div className="footer-bottom">
         <p>&copy; 2024 EasyLife Marketplace. All rights reserved.</p>
       </div>
+      {showPopup && <Popup title={popupTitle} message={popupMessage} onClose={closePopup} />}
     </footer>
   );
 };
 
 export default Footer;
+

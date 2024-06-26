@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useUser } from './UserContext';
 import '../styles/views/Home.scss';
 import Popup from './Popup';
+import api from '../helpers/api';
+import ClickedProductsChart from './ClickedProductsChart';
 
 const Home = () => {
   const { user } = useUser();
@@ -10,19 +11,21 @@ const Home = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
-  console.log("home user", user);
-
   useEffect(() => {
-    // Fetch dashboard data based on user role
     const fetchData = async () => {
       try {
         let response;
+        const config = {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`
+          }
+        };
         if (user.role === 'admin') {
-          response = await axios.get('http://localhost:8000/api/admin/dashboard');
+          response = await api.get('admin/dashboard/', config);
         } else if (user.role === 'vendor') {
-          response = await axios.get('http://localhost:8000/api/vendor/dashboard');
+          response = await api.get('vendor/dashboard/', config);
         } else if (user.role === 'customer') {
-          response = await axios.get('http://localhost:8000/api/customer/dashboard');
+          response = await api.get('customer/dashboard/', config);
         }
         setDashboardData(response.data);
       } catch (error) {
@@ -66,6 +69,8 @@ const Home = () => {
           <p>Total Sales: ${dashboardData.total_sales}</p>
           <p>Total Products: {dashboardData.total_products}</p>
           <p>Pending Orders: {dashboardData.pending_orders}</p>
+          <h3>Most Visited Products</h3>
+          <ClickedProductsChart />
           {/* Add more vendor-specific info and quick links */}
         </div>
       )}

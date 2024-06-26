@@ -7,7 +7,7 @@ import { isProduction } from "./isProduction"
  * @returns {string}
  */
 export const getDomain = () => {
-  const prodUrl = "http://ec2-51-20-77-139.eu-north-1.compute.amazonaws.com:8080"
+  const prodUrl = "https://server-ecommerce-1pvv.onrender.com/api/"
   const devUrl = 'http://localhost:8000/api/'
 
   return isProduction() ? prodUrl : devUrl

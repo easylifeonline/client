@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import api from '../helpers/api';
 import '../styles/views/ProductList.scss';
 import { FaBoxOpen, FaImage } from 'react-icons/fa';
+import trackClickedProduct from "../components/websiteData/TrackClickedProduct";
 
 const ProductListAll = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/products-all/');
+        const response = await api.get('products-all/');
         setProducts(response.data);
-        console.log('Fetched all products:', response.data);
       } catch (error) {
         console.error("Error fetching all products:", error);
       }
@@ -20,13 +22,22 @@ const ProductListAll = () => {
     fetchProducts();
   }, []);
 
+  const handleProductClick = (productId) => {
+    trackClickedProduct(productId);
+    navigate(`/products/${productId}`);
+  };
+
   return (
     <div className="product-list-container">
       <h2>All Products</h2>
       <div className="products">
         {products.length > 0 ? (
           products.map((product) => (
-            <div key={product.id} className="product-item">
+            <div
+              key={product.id}
+              className="product-item"
+              onClick={() => handleProductClick(product.id)}
+            >
               {product.image ? (
                 <img src={product.image} alt={product.title} className="product-image" />
               ) : (

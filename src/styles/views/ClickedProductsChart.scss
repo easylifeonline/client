@@ -1,0 +1,107 @@
+// Variables
+$colors: (
+  'primary': #FF6384,
+  'secondary': #36A2EB,
+  'tertiary': #FFCE56,
+  'quaternary': #4BC0C0,
+  'quinary': #9966FF,
+  'senary': #FF9F40
+);
+
+$font-size-base: 16px;
+$font-size-large: 20px;
+$font-size-small: 14px;
+
+// Helper functions
+@function color-nth($index) {
+  $keys: map-keys($colors);
+  @return map-get($colors, nth($keys, $index % length($keys) + 1));
+}
+
+// General styling for the chart container
+.chart-container {
+  width: 100%;
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  label {
+    display: block;
+    font-size: $font-size-base;
+    margin-bottom: 10px;
+  }
+
+  select {
+    width: 100%;
+    padding: 8px;
+    font-size: $font-size-base;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+}
+
+// Chart styling
+.chart {
+  &.bar-chart {
+    canvas {
+      width: 100%;
+      height: 400px;
+    }
+  }
+
+  &.line-chart {
+    canvas {
+      width: 100%;
+      height: 400px;
+    }
+  }
+
+  &.pie-chart,
+  &.doughnut-chart {
+    canvas {
+      width: 100%;
+      height: 400px;
+    }
+  }
+
+  &.radar-chart {
+    canvas {
+      width: 100%;
+      height: 400px;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 10px;
+
+    label {
+      font-size: $font-size-small;
+    }
+
+    select {
+      font-size: $font-size-small;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .chart-container {
+    max-width: 1200px;
+
+    label {
+      font-size: $font-size-large;
+    }
+
+    select {
+      font-size: $font-size-large;
+    }
+  }
+}
