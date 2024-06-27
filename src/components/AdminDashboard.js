@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../helpers/api';
 import { useUser } from './UserContext';
 import PopupDeleteUser from './PopupDeleteUser';
-import { FaTrash, FaSearch, FaFilter } from 'react-icons/fa'; // Import icons
+import { FaTrash, FaSearch, FaFilter } from 'react-icons/fa';
 import '../styles/views/AdminDashboard.scss';
 
 const AdminDashboard = () => {
@@ -13,6 +13,8 @@ const AdminDashboard = () => {
   const [showPopupDeleteUser, setShowPopupDeleteUser] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRole, setSelectedRole] = useState('');
+  const [vendorRequests, setVendorRequests] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (user && user.role === 'admin') {
@@ -25,13 +27,33 @@ const AdminDashboard = () => {
           });
           setUsers(response.data);
           setFilteredUsers(response.data);
-          console.log("List of users:", response.data);
         } catch (error) {
           console.error('Error fetching users:', error);
         }
       };
 
       fetchUsers();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      const fetchVendorRequests = async () => {
+        try {
+          const token = localStorage.getItem('access_token');
+          const response = await api.get('vendor-requests/', {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          setVendorRequests(response.data);
+        } catch (error) {
+          console.error('Error fetching vendor requests:', error);
+          setErrorMessage('Failed to load vendor requests.');
+        }
+      };
+
+      fetchVendorRequests();
     }
   }, [user]);
 

@@ -106,7 +106,9 @@ const Header = ({ height }) => {
             Profiles Management
             <div className="dropdown-content">
               <span onClick={() => navigate("/admin/dashboard")}>View All Profiles</span>
-              <span onClick={() => navigate("/admin/create-profile")}>Create New Profile</span>
+              <span onClick={() => navigate("/admin/add-category")}>Add a Product Category</span>
+              <span onClick={() => navigate("/view-categories")}>View Product Categories</span>
+              <span onClick={() => navigate("/admin/vendor-requests")}>Vendor Requests</span>
             </div>
           </div>
         )}
@@ -117,13 +119,16 @@ const Header = ({ height }) => {
               <span onClick={() => navigate("/vendor/products")}>View My Products</span>
               <span onClick={() => navigate("/vendor/add-product")}>Add New Product</span>
               <span onClick={() => navigate("/vendor/inventory")}>Inventory Management</span>
+              <span onClick={() => navigate("/vendor/orders")}>View Orders</span>
+              <span onClick={() => navigate("/view-categories")}>Platform Categories</span>
             </div>
           </div>
         )}
         {(!user || (user && user.role === "customer")) && (
           <>
             <span className="nav-item" onClick={() => navigate("/contact")}>Contact</span>
-            <span className="nav-item" onClick={() => navigate("/vendor")}>Become a Vendor</span>
+            <span className="nav-item" onClick={() => navigate("/about")}>About</span>
+            <span className="nav-item" onClick={() => navigate("/vendor-contact-form")}>Become a Vendor</span>
           </>
         )}
       </div>

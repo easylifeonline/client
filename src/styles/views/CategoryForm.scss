@@ -1,12 +1,13 @@
-.vendor-contact-form-container {
-    max-width: 800px;
+/* CategoryForm.scss */
+.category-form-container {
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 135px;
+    margin-top: 150px;
   
     h2 {
       text-align: center;
@@ -14,13 +15,7 @@
       margin-bottom: 20px;
     }
   
-    p {
-      text-align: center;
-      color: #555;
-      margin-bottom: 20px;
-    }
-  
-    .vendor-contact-form {
+    .category-form {
       display: flex;
       flex-direction: column;
   
@@ -34,19 +29,13 @@
           font-weight: bold;
         }
   
-        input,
-        textarea {
-          width: 100%;
+        input {
+          width: calc(100% - 22px); /* Adjust the width to fit within the container, considering padding and border */
           padding: 10px;
           border: 1px solid #ddd;
           border-radius: 4px;
           font-size: 16px;
-          box-sizing: border-box; // Ensure padding is included in the element's total width and height
-        }
-  
-        textarea {
-          height: 100px;
-          resize: vertical;
+          box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
         }
       }
   
@@ -59,18 +48,11 @@
         font-size: 16px;
         cursor: pointer;
         align-self: center;
-        width: 100%;
-      }
   
-      .submit-button:hover {
-        background-color: #0056b3;
+        &:hover {
+          background-color: #0056b3;
+        }
       }
-    }
-  
-    .message {
-      text-align: center;
-      color: #28a745;
-      margin-top: 20px;
     }
   
     @media (max-width: 768px) {
@@ -80,17 +62,12 @@
         font-size: 20px;
       }
   
-      p {
-        font-size: 14px;
-      }
-  
       .form-group {
         label {
           font-size: 14px;
         }
   
-        input,
-        textarea {
+        input {
           font-size: 14px;
         }
       }
@@ -99,6 +76,4 @@
         font-size: 14px;
       }
     }
-  }
-  
-    
+  }  

@@ -2,6 +2,8 @@ import React from 'react';
 import '../styles/views/Vendor.scss';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from './UserContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserPlus, faFileAlt, faPaperPlane, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Vendor = () => {
     const navigate = useNavigate();
@@ -33,12 +35,36 @@ const Vendor = () => {
 
       <div className="section">
         <h3>Steps to Become a Vendor</h3>
-        <ol>
-          <li>Sign up for an account</li>
-          <li>Fill out the vendor application form</li>
-          <li>Submit your application for review</li>
-          <li>Get approved and start listing your products</li>
-        </ol>
+        <div className="steps-container">
+          <div className="step-box">
+            <div className="step-number">
+              <FontAwesomeIcon icon={faUserPlus} className="step-icon" />
+              1
+            </div>
+            <div className="step-description">Sign up for an account</div>
+          </div>
+          <div className="step-box">
+            <div className="step-number">
+              <FontAwesomeIcon icon={faFileAlt} className="step-icon" />
+              2
+            </div>
+            <div className="step-description">Fill out the vendor application form</div>
+          </div>
+          <div className="step-box">
+            <div className="step-number">
+              <FontAwesomeIcon icon={faPaperPlane} className="step-icon" />
+              3
+            </div>
+            <div className="step-description">Submit your application for review</div>
+          </div>
+          <div className="step-box">
+            <div className="step-number">
+              <FontAwesomeIcon icon={faCheckCircle} className="step-icon" />
+              4
+            </div>
+            <div className="step-description">Get approved and start listing your products</div>
+          </div>
+        </div>
       </div>
 
       <div className="section">

@@ -29,6 +29,9 @@ import FAQs from "../../FAQs";
 import TermsOfService from "../../TermsOfService";
 import HelpCenter from "../../HelpCenter";
 import Vendor from "../../Vendor";
+import ViewVendorRequests from "../../ViewVendorRequests";
+import CategoryForm from "../../CategoryForm";
+import ViewCategories from "../../ViewCategories";
 
 const AppRouter = () => {
   return (
@@ -77,6 +80,27 @@ const AppRouter = () => {
             path="/vendor"
             element={
                 <Vendor />
+            }
+          />
+
+          <Route
+            path="/admin/vendor-requests"
+            element={
+                <ViewVendorRequests />
+            }
+          />
+
+          <Route
+            path="/admin/add-category"
+            element={
+                <CategoryForm />
+            }
+          />
+
+          <Route
+            path="/view-categories"
+            element={
+                <ViewCategories />
             }
           />
 

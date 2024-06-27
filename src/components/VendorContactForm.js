@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import '../styles/views/VendorContactForm.scss';
 import { useUser } from "./UserContext";
+import api from "../helpers/api";
+import { useNavigate } from 'react-router-dom';
+import Popup from './Popup';
 
 const VendorContactForm = () => {
   const { user } = useUser();
+    const navigate = useNavigate();
   const [formData, setFormData] = useState({
     businessName: '',
     contactPerson: '',
@@ -19,6 +23,7 @@ const VendorContactForm = () => {
   });
 
   const [message, setMessage] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,12 +33,43 @@ const VendorContactForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Logic to send form data to the backend
-    console.log('Form submitted:', formData);
-    setMessage('Your application has been submitted. We will contact you soon.');
-  };
+    try {
+      const token = localStorage.getItem("access_token");
+      const response = await api.post('vendor-requests/', {
+        business_name: formData.businessName,
+        contact_person: formData.contactPerson,
+        email: formData.email,
+        phone: formData.phone,
+        product_types: formData.productTypes,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        zip_code: formData.zipCode,
+        country: formData.country,
+        description: formData.description
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setMessage('Your application has been submitted. We will contact you soon.');
+      navigate('/home');
+    } catch (error) {
+        console.error('Error submitting form:', error.response.data);
+        if (error.response && error.response.status === 400 && error.response.data.detail) {
+          setMessage(error.response.data.detail);
+        } else {
+          setMessage('There was an error submitting your application. Please try again.');
+        }
+        setShowPopup(true);
+      }
+    };
+  
+    const closePopup = () => {
+      setShowPopup(false);
+    };
 
   return (
     <div className="vendor-contact-form-container">
@@ -93,7 +129,7 @@ const VendorContactForm = () => {
             name="productTypes"
             value={formData.productTypes}
             onChange={handleChange}
-            placeholder="Describe the types of products you will be selling"
+            placeholder="Describe the types of products you will be selling... eg: clothing, accessories, home goods, etc."
             required
           />
         </div>
@@ -171,6 +207,7 @@ const VendorContactForm = () => {
         <button type="submit" className="submit-button">Submit</button>
       </form>
       {message && <p className="message">{message}</p>}
+      {showPopup && <Popup message={message} onClose={closePopup} />}
     </div>
   );
 };

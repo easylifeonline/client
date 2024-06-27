@@ -4,6 +4,7 @@ import '../styles/views/Home.scss';
 import Popup from './Popup';
 import api from '../helpers/api';
 import ClickedProductsChart from './ClickedProductsChart';
+import UserVendorRequests from './UserVendorRequests';
 
 const Home = () => {
   const { user } = useUser();
@@ -83,7 +84,7 @@ const Home = () => {
               <li key={order.id}>Order #{order.id} - ${order.total}</li>
             ))}
           </ul>
-          {/* Add more customer-specific info and quick links */}
+          <UserVendorRequests />
         </div>
       )}
 
