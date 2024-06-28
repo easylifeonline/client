@@ -67,6 +67,39 @@
         color: #555;
       }
     }
+
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+
+      .update-button,
+      .delete-button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .update-button {
+        background-color: #4CAF50;
+        color: white;
+
+        &:hover {
+          background-color: #45a049;
+        }
+      }
+
+      .delete-button {
+        background-color: #f44336;
+        color: white;
+
+        &:hover {
+          background-color: #e53935;
+        }
+      }
+    }
   }
 
   .no-products {

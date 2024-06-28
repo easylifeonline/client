@@ -3,7 +3,7 @@ import api from "../helpers/api";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from './UserContext';
 import '../styles/views/AddProduct.scss';
-import Popup from './Popup'; // Assuming Popup is a component that displays messages
+import Popup from './Popup'; 
 
 const AddProduct = () => {
   const { user } = useUser();
@@ -22,6 +22,7 @@ const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false); 
   const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -57,13 +58,13 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true); // Start the spinner
+    setIsSubmitting(true); 
 
     const productData = new FormData();
     for (let key in formData) {
       if (key === 'images') {
         imageFiles.forEach((file) => {
-          productData.append('images', file);
+          productData.append('image', file);
         });
       } else {
         productData.append(key, formData[key]);
@@ -84,22 +85,24 @@ const AddProduct = () => {
       });
 
       if (response.status === 201) {
-        Popup("Product added successfully");
+        setPopupMessage("Product added successfully");
         setShowPopup(true);
         navigate('/vendor/products');
       } else {
-        Popup(`Failed to add product: ${response.status}`);
+        setPopupMessage(`Failed to add product: ${response.status}`);
+        setShowPopup(true);
       }
     } catch (error) {
       console.error("Error adding product:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
-        Popup(`Failed to add product: ${error.response.data.detail || error.response.statusText}`);
+        setPopupMessage("Failed to add product: " + error.response.data.detail || error.response.statusText);
       } else {
-        Popup(`Failed to add product: ${error.message}`);
+        setPopupMessage(`Failed to add product: ${error.message}`);
       }
+      setShowPopup(true);
     } finally {
-      setIsSubmitting(false); // Stop the spinner
+      setIsSubmitting(false); 
     }
   };
 
@@ -112,6 +115,10 @@ const AddProduct = () => {
       formData.sku &&
       imageFiles.length > 0
     );
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -163,11 +170,10 @@ const AddProduct = () => {
           {isSubmitting ? 'Adding...' : 'Add Product'}
         </button>
       </form>
-        {showPopup && <Popup message="Product added successfully" closePopup={setShowPopup} />}
+      {showPopup && <Popup message={popupMessage} onClose={closePopup} />}
     </div>
   );
 };
 
 export default AddProduct;
-
 

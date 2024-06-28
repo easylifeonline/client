@@ -2,10 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from "../helpers/api"
 import '../styles/views/ProductDetail.scss';
+import { importedImages } from '../helpers/importImages'; 
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+
+
+  const getPathFromUrl = (url) => {
+    const parsedUrl = new URL(url);
+    return parsedUrl.pathname.split('/').pop();
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,7 +35,7 @@ const ProductDetail = () => {
     <div className="product-detail-container">
       <div className="product-image">
         {product.image ? (
-          <img src={product.image} alt={product.title} />
+          <img src={importedImages[getPathFromUrl(product.image)]} alt={product.title} />
         ) : (
           <div className="product-image-placeholder">No Image Available</div>
         )}

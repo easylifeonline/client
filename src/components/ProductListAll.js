@@ -4,10 +4,16 @@ import api from '../helpers/api';
 import '../styles/views/ProductList.scss';
 import { FaBoxOpen, FaImage } from 'react-icons/fa';
 import trackClickedProduct from "../components/websiteData/TrackClickedProduct";
+import { importedImages } from '../helpers/importImages';
 
 const ProductListAll = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
+  const getPathFromUrl = (url) => {
+    const parsedUrl = new URL(url);
+    return parsedUrl.pathname.split('/').pop();
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -39,7 +45,10 @@ const ProductListAll = () => {
               onClick={() => handleProductClick(product.id)}
             >
               {product.image ? (
-                <img src={product.image} alt={product.title} className="product-image" />
+                <React.Fragment>
+                  {console.log(importedImages[getPathFromUrl(product.image)])}
+                  <img src={importedImages[getPathFromUrl(product.image)]} alt={product.title} className="product-image" />
+                </React.Fragment>
               ) : (
                 <div className="product-image-placeholder">
                   <FaImage className="image-icon" />

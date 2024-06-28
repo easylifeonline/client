@@ -32,6 +32,7 @@ import Vendor from "../../Vendor";
 import ViewVendorRequests from "../../ViewVendorRequests";
 import CategoryForm from "../../CategoryForm";
 import ViewCategories from "../../ViewCategories";
+import UpdateProduct from "../../UpdateProduct";
 
 const AppRouter = () => {
   return (
@@ -103,6 +104,8 @@ const AppRouter = () => {
                 <ViewCategories />
             }
           />
+
+          <Route path="/update-product/:productId" element={<UpdateProduct />} />
 
           <Route
             path="/about"

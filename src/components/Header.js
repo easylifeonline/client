@@ -68,6 +68,14 @@ const Header = ({ height }) => {
     }
   };
 
+  const handleBecomeVendorClick = () => {
+    if (user) {
+      navigate("/vendor-contact-form");
+    } else {
+      navigate("/vendor");
+    }
+  };
+
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
@@ -128,7 +136,7 @@ const Header = ({ height }) => {
           <>
             <span className="nav-item" onClick={() => navigate("/contact")}>Contact</span>
             <span className="nav-item" onClick={() => navigate("/about")}>About</span>
-            <span className="nav-item" onClick={() => navigate("/vendor-contact-form")}>Become a Vendor</span>
+            <span className="nav-item" onClick={handleBecomeVendorClick}>Become a Vendor</span>
           </>
         )}
       </div>
