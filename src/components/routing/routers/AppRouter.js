@@ -10,7 +10,6 @@ import UserAddresses from "../../UserAddresses";
 import UserProfile from "../../UserProfile";
 import UpdateUserDetail from "../../UpdateUserDetail";
 import { UserProvider } from '../../UserContext';
-import ServiceRouter from "./ServiceRouter";
 import ProtectedRoute from "../../ProtectedRoute"; 
 import Home from "../../Home";
 import PasswordResetRequest from "../../PasswordResetRequest";
@@ -33,6 +32,10 @@ import ViewVendorRequests from "../../ViewVendorRequests";
 import CategoryForm from "../../CategoryForm";
 import ViewCategories from "../../ViewCategories";
 import UpdateProduct from "../../UpdateProduct";
+import ShoppingCart from '../../ShoppingCart';
+import Checkout from '../../Checkout';
+import OrderSummary from '../../OrderSummary';
+import ViewProductByCategory from "../../ViewProductByCategory";
 
 const AppRouter = () => {
   return (
@@ -43,7 +46,7 @@ const AppRouter = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/services/*" element={<ServiceRouter />} />
+          <Route path="/view-products/:category" element={<ViewProductByCategory />} />
           <Route path="/password_reset" element={<PasswordResetRequest />} /> 
           <Route path="/reset/:uidb64/:token" element={<PasswordResetConfirm />} />
             <Route path="*" element={<NotFound />} />
@@ -55,6 +58,10 @@ const AppRouter = () => {
                 <Home />
             }
           />
+
+          <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-summary/:orderId" element={<OrderSummary />} />
 
           <Route
             path="/contact"

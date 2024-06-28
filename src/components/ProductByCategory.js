@@ -6,7 +6,7 @@ import { FaBoxOpen, FaImage } from 'react-icons/fa';
 import trackClickedProduct from "../components/websiteData/TrackClickedProduct";
 import { importedImages } from '../helpers/importImages';
 
-const ProductListAll = () => {
+const ProductByCategory = ({ category }) => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
@@ -16,17 +16,21 @@ const ProductListAll = () => {
   };
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProductsByCategory = async () => {
       try {
-        const response = await api.get('products-all/');
+        const response = await api.get('products/', {
+          params: { category: category }
+        });
         setProducts(response.data);
       } catch (error) {
-        console.error("Error fetching all products:", error);
+        console.error("Error fetching products by category:", error);
       }
     };
 
-    fetchProducts();
-  }, []);
+    if (category) {
+      fetchProductsByCategory();
+    }
+  }, [category]);
 
   const handleProductClick = (productId) => {
     trackClickedProduct(productId);
@@ -35,7 +39,7 @@ const ProductListAll = () => {
 
   return (
     <div className="product-list-container">
-      <h2>All Products</h2>
+      <h2>Products in {category}</h2>
       <div className="products">
         {products.length > 0 ? (
           products.map((product) => (
@@ -72,4 +76,4 @@ const ProductListAll = () => {
   );
 };
 
-export default ProductListAll;
+export default ProductByCategory;

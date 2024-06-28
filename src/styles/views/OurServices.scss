@@ -1,50 +1,48 @@
 .our-services {
-  position: fixed; // Fix the position on the screen
-  top: 70px; // Adjust according to the height of the header to avoid overlap
+  position: fixed;
+  top: 70px;
   left: 0;
   right: 0;
-  z-index: 999; // Ensure it stays above other content
-  background-color: #f8f9fa; // Light background color
-  padding: 20px 0; // Adjust padding to fit the fixed layout
-
+  z-index: 999;
+  background-color: #f8f9fa;
+  padding: 20px 0;
   display: flex;
   align-items: center;
-  justify-content: space-between; // Space between services and search
+  justify-content: space-between;
 
   .services-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    overflow-x: auto; // Enable horizontal scrolling
-    white-space: nowrap; // Prevent wrapping
-    scrollbar-width: thin; // Thin scrollbar for Firefox
-    scrollbar-color: #28a745 #f8f9fa; // Scrollbar color for Firefox
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: #28a745 #f8f9fa;
 
     &::-webkit-scrollbar {
-      height: 8px; // Scrollbar height for Webkit browsers
+      height: 8px;
     }
 
     &::-webkit-scrollbar-track {
-      background: #f8f9fa; // Scrollbar track color
+      background: #f8f9fa;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #28a745; // Scrollbar thumb color
-      border-radius: 10px; // Rounded corners for scrollbar thumb
+      background: #28a745;
+      border-radius: 10px;
     }
 
     li {
-      display: inline-block; // Ensure each item stays on one line
+      display: inline-block;
       padding: 10px 20px;
       cursor: pointer;
       transition: all 0.3s ease;
       font-size: 1.2rem;
-      color: #28a745; // Green text color
+      color: #28a745;
       font-weight: bold;
-      position: relative; // For the separator
+      position: relative;
 
-      // Separator line between items
       &::after {
         content: "";
         position: absolute;
@@ -57,68 +55,103 @@
       }
 
       &:hover {
-        background-color: #28a745; // Green background on hover
-        color: #fff; // White text on hover
+        background-color: #28a745;
+        color: #fff;
       }
 
-      // Remove the separator after the last item
       &:last-child::after {
         display: none;
       }
     }
 
     .service-link {
-      text-decoration: none; // Remove underline from links
-      color: inherit; // Inherit color for hover effect
+      text-decoration: none;
+      color: inherit;
     }
   }
 
   .search-section {
     display: flex;
     align-items: center;
-    margin-right: 20px; // Add more margin between the search section and the edge of the screen
+    margin-right: 20px;
 
-    .search-input {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px 0 0 4px;
-      outline: none;
-      min-width: 200px;
+    .cart-icon-container {
+      position: relative;
+      margin-right: 20px;
+      font-size: 1.5rem;
+      color: #28a745;
+      cursor: pointer;
+
+      &:hover::after {
+        content: attr(title);
+        position: absolute;
+        top: -25px;
+        right: -10px;
+        background-color: #28a745;
+        color: #fff;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+
+      .cart-item-count {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #28a745;
+        color: #fff;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
     }
 
-    .search-button {
-      padding: 10px;
-      background-color: #28a745;
-      border: none;
-      border-radius: 0 4px 4px 0;
-      color: #fff;
-      cursor: pointer;
+    .search-container {
       display: flex;
       align-items: center;
-      justify-content: center;
 
-      &:hover {
-        background-color: #218838; // Darker green on hover
+      .search-input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px;
+        outline: none;
+        min-width: 200px;
+      }
+
+      .search-button {
+        padding: 10px;
+        background-color: #28a745;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background-color: #218838;
+        }
       }
     }
   }
 
-  // Responsive design for small screens
   @media (max-width: 768px) {
-    flex-direction: column; // Stack items vertically on small screens
-    align-items: flex-start; // Align items to the start on small screens
-    padding: 10px; // Adjust padding for small screens
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
 
     .services-list {
-      width: 100%; // Full width for the services list
-      overflow-x: auto; // Enable horizontal scrolling
-      padding: 0 10px; // Add some padding for scrolling
+      width: 100%;
+      overflow-x: auto;
+      padding: 0 10px;
 
       li {
-        padding: 10px 10px; // Adjust padding for small screens
-        margin-right: 10px; // Space between items
+        padding: 10px 10px;
+        margin-right: 10px;
 
-        // Hide the separator on small screens
         &::after {
           display: none;
         }
@@ -126,9 +159,9 @@
     }
 
     .search-section {
-      width: 100%; // Full width for the search section
-      margin-top: 10px; // Space between services and search
-      justify-content: flex-end; // Align search to the right
+      width: 100%;
+      margin-top: 10px;
+      justify-content: flex-end;
     }
   }
 }
