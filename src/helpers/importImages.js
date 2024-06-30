@@ -1,5 +1,7 @@
+// src/helpers/importImages.js
+
 function importAll(r) {
-        let images = {};
+    let images = {};
         r.keys().forEach((item) => {
             images[item.replace('./', '')] = r(item);
         });

@@ -1,41 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../helpers/api';
 import '../styles/views/ProductDetail.scss';
 import { importedImages } from '../helpers/importImages';
-import { useUser } from './UserContext';
+import { useCart } from '../contexts/CartContext';
 import ProductByCategory from './ProductByCategory';
+import getPathFromUrl from '../helpers/getPathFromUrl';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { cartItems, addToCart, fetchCartSummary } = useCart();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [cartSummary, setCartSummary] = useState([]);
-
-  const getPathFromUrl = (url) => {
-    const parsedUrl = new URL(url);
-    return parsedUrl.pathname.split('/').pop();
-  };
-
-  const fetchCartSummary = useCallback(async () => {
-    if (user) {
-      try {
-        const response = await api.get('cart/', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-          }
-        });
-        setCartSummary(response.data);
-      } catch (error) {
-        console.error('Error fetching cart summary:', error);
-      }
-    } else {
-      const localCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
-      setCartSummary(localCart);
-    }
-  }, [user]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -51,38 +28,12 @@ const ProductDetail = () => {
     fetchCartSummary();
   }, [id, fetchCartSummary]);
 
-  const handleAddToCart = async () => {
-    if (user) {
-      try {
-        await api.post('cart/items/', { product_id: id, quantity }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-          }
-        });
-        alert('Product added to cart');
-        fetchCartSummary();
-      } catch (error) {
-        console.error('Error adding product to cart:', error);
-      }
-    } else {
-      let localCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
-      const itemIndex = localCart.items.findIndex(item => item.product.id === product.id);
-
-      if (itemIndex > -1) {
-        localCart.items[itemIndex].quantity += quantity;
-      } else {
-        localCart.items.push({
-          product: {
-            id: product.id,
-            title: product.title
-          },
-          quantity: quantity
-        });
-      }
-
-      localStorage.setItem('cart', JSON.stringify(localCart));
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product, quantity);
       alert('Product added to cart');
-      setCartSummary(localCart);
+    } else {
+      console.error('Product is undefined');
     }
   };
 
@@ -125,9 +76,9 @@ const ProductDetail = () => {
         </div>
         <div className="cart-summary">
           <h2>Cart Summary</h2>
-          {cartSummary.items && cartSummary.items.length > 0 ? (
+          {cartItems && cartItems.length > 0 ? (
             <ul>
-              {cartSummary.items.map((item) => (
+              {cartItems.map((item) => (
                 <li key={item.product.id}>
                   {item.product.title} x {item.quantity}
                 </li>
@@ -148,3 +99,4 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+

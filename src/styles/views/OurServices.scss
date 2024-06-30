@@ -33,7 +33,8 @@
       border-radius: 10px;
     }
 
-    li {
+    .service-item {
+      position: relative;
       display: inline-block;
       padding: 10px 20px;
       cursor: pointer;
@@ -41,7 +42,10 @@
       font-size: 1.2rem;
       color: #28a745;
       font-weight: bold;
-      position: relative;
+
+      &:hover .subcategory-list {
+        display: block;
+      }
 
       &::after {
         content: "";
@@ -55,18 +59,54 @@
       }
 
       &:hover {
-        background-color: #28a745;
+        background-color: #388E3C; // Green hover color
         color: #fff;
       }
 
       &:last-child::after {
         display: none;
       }
-    }
 
-    .service-link {
-      text-decoration: none;
-      color: inherit;
+      .service-link {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .subcategory-list {
+        display: none;
+        position: fixed;
+        top: 90px; /* Adjust this value to position the dropdown correctly */
+        left: 0;
+        z-index: 1000;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        list-style: none;
+        padding: 10px 0;
+        margin-top: 10px; /* Add some space above */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        max-height: 300px;
+        overflow-y: auto;
+
+        li {
+          padding: 5px 20px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 1rem;
+          color: #28a745;
+          font-weight: bold;
+
+          &:hover {
+            background-color: #666; // Slightly lighter color on hover
+            color: #fff;
+          }
+
+          .subcategory-link {
+            text-decoration: none;
+            color: inherit;
+          }
+        }
+      }
     }
   }
 
@@ -109,6 +149,7 @@
     }
 
     .search-container {
+      position: relative;
       display: flex;
       align-items: center;
 
@@ -135,6 +176,29 @@
           background-color: #218838;
         }
       }
+
+      .suggestions-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 0 0 4px 4px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+
+        li {
+          padding: 10px;
+          cursor: pointer;
+          transition: background-color 0.2s;
+
+          &:hover {
+            background-color: #f1f1f1;
+          }
+        }
+      }
     }
   }
 
@@ -148,7 +212,7 @@
       overflow-x: auto;
       padding: 0 10px;
 
-      li {
+      .service-item {
         padding: 10px 10px;
         margin-right: 10px;
 

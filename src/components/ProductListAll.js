@@ -10,9 +10,17 @@ const ProductListAll = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
-  const getPathFromUrl = (url) => {
-    const parsedUrl = new URL(url);
-    return parsedUrl.pathname.split('/').pop();
+  const getPathFromUrl = (inputImg) => {
+    if (inputImg === null) {
+      return null;
+    }
+  
+    try {
+      const parsedUrl = new URL(inputImg);
+      return parsedUrl.pathname.split('/').pop();
+    } catch (e) {
+      return inputImg.split('/').pop();
+    }
   };
 
   useEffect(() => {

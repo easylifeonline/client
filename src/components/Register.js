@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import '../styles/views/Register.scss'; 
 import { useNavigate } from "react-router-dom";
-import { useUser } from "./UserContext"; // Import the UserContext to update the user state
+import { useUser } from "./UserContext";
+import api from '../helpers/api';
 
 function Register() {
     const navigate = useNavigate();
-    const { setUser } = useUser(); // Use the context to set the user
+    const { setUser } = useUser();
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -32,11 +32,9 @@ function Register() {
         }
 
         try {
-            // Registration request
-            await axios.post('http://localhost:8000/api/register/', formData);
+            await api.post('register/', formData);
             alert("Registration successful");
 
-            // Automatically log in the user after successful registration
             await loginUser();
         } catch (error) {
             console.error(error);
@@ -46,22 +44,20 @@ function Register() {
 
     const loginUser = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/api/login/', {
+            const response = await api.post('login/', {
                 username: formData.username,
                 password: formData.password
             });
 
-            // Save the JWT tokens in local storage
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
 
-            // Fetch and set the user data in the context
-            const userResponse = await axios.get("http://localhost:8000/api/profile/", {
+            const userResponse = await api.get("profile/", {
                 headers: {
                     Authorization: `Bearer ${response.data.access}`
                 }
             });
-            setUser(userResponse.data); // Update user in context
+            setUser(userResponse.data);
 
             navigate("/home");
         } catch (error) {
@@ -82,6 +78,7 @@ function Register() {
                         id="username" 
                         className="register-input" 
                         onChange={handleChange} 
+                        required
                     />
                 </div>
                 <div className="register-field">
@@ -92,6 +89,7 @@ function Register() {
                         id="email" 
                         className="register-input" 
                         onChange={handleChange} 
+                        required
                     />
                 </div>
                 <div className="register-field">
@@ -102,6 +100,7 @@ function Register() {
                         id="password" 
                         className="register-input" 
                         onChange={handleChange} 
+                        required
                     />
                 </div>
                 <div className="register-field">
@@ -112,6 +111,7 @@ function Register() {
                         id="password2" 
                         className="register-input" 
                         onChange={handleChange} 
+                        required
                     />
                 </div>
                 <div className="register-field">
@@ -138,6 +138,9 @@ function Register() {
                     <button type="submit" className="button">Register</button>
                 </div>
             </form>
+            <div className="register-prompt">
+                Do you already have an account? If yes, <a href="/login">Sign In here</a>.
+            </div>
         </div>
     );
 }

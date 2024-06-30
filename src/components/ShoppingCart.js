@@ -1,41 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../helpers/api';
 import { useUser } from './UserContext';
 import '../styles/views/ShoppingCart.scss';
+import { useCart } from '../contexts/CartContext';
 import { importedImages } from '../helpers/importImages';
+import getPathFromUrl from '../helpers/getPathFromUrl';
+import { FaImage } from 'react-icons/fa';
 
 const ShoppingCart = () => {
   const { user } = useUser();
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([]);
-
-  const getPathFromUrl = (url) => {
-    const parsedUrl = new URL(url);
-    return parsedUrl.pathname.split('/').pop();
-  };
+  const { cartItems, fetchCartSummary } = useCart();
 
   useEffect(() => {
-    const fetchCartItems = async () => {
-      if (user) {
-        try {
-          const response = await api.get('cart/', {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('access_token')}`
-            }
-          });
-          setCartItems(response.data.items);
-        } catch (error) {
-          console.error('Error fetching cart items:', error);
-        }
-      } else {
-        const localCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
-        setCartItems(localCart.items);
-      }
-    };
-
-    fetchCartItems();
-  }, [user]);
+    fetchCartSummary();
+  }, [fetchCartSummary]);
 
   const handleUpdateQuantity = async (itemId, quantity) => {
     if (user) {
@@ -45,11 +25,7 @@ const ShoppingCart = () => {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`
           }
         });
-        setCartItems((prevItems) =>
-          prevItems.map((item) =>
-            item.id === itemId ? { ...item, quantity } : item
-          )
-        );
+        fetchCartSummary();
       } catch (error) {
         console.error('Error updating quantity:', error);
       }
@@ -60,7 +36,7 @@ const ShoppingCart = () => {
       if (itemIndex > -1) {
         localCart.items[itemIndex].quantity = quantity;
         localStorage.setItem('cart', JSON.stringify(localCart));
-        setCartItems(localCart.items);
+        fetchCartSummary();
       }
     }
   };
@@ -73,7 +49,7 @@ const ShoppingCart = () => {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`
           }
         });
-        setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+        fetchCartSummary();
       } catch (error) {
         console.error('Error removing item:', error);
       }
@@ -81,7 +57,7 @@ const ShoppingCart = () => {
       let localCart = JSON.parse(localStorage.getItem('cart')) || { items: [] };
       localCart.items = localCart.items.filter(item => item.id !== itemId);
       localStorage.setItem('cart', JSON.stringify(localCart));
-      setCartItems(localCart.items);
+      fetchCartSummary();
     }
   };
 
@@ -96,10 +72,15 @@ const ShoppingCart = () => {
         <div className="cart-items">
           {cartItems.map((item) => (
             <div key={item.id} className="cart-item">
-              <img src={item.product.image} alt={item.product.title} className="cart-item-image" />
-              {/* {console.log("item.product.image: ", item.product.image)}
-                {console.log("importedImages===================: ", item)} */}
-              {/* <img src={importedImages[getPathFromUrl(item.product.image)]} alt={item.product.image} className="cart-item-image" /> */}
+              {item.product.image ? (
+                <img
+                  src={importedImages[getPathFromUrl(item.product.image)]}
+                  alt={item.product.title}
+                  className="cart-item-image"
+                />
+              ) : (
+                <FaImage className="cart-item-image-placeholder" />
+              )}
               <div className="cart-item-details">
                 <h3>{item.product.title}</h3>
                 <p>Price: ${item.product.price}</p>

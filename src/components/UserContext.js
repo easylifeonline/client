@@ -1,5 +1,3 @@
-// UserContext.js
-
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
@@ -11,7 +9,6 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        // Fetch user data on mount if token exists
         const token = localStorage.getItem("access_token");
         if (token) {
             axios.get("http://localhost:8000/api/profile/", {

@@ -4,8 +4,9 @@ import api from '../helpers/api';
 import { useUser } from './UserContext';
 import '../styles/views/ProductList.scss';
 import { FaBoxOpen, FaImage } from 'react-icons/fa';
-import Popup from './Popup';
+import PopupDeleteUser from './PopupDeleteUser';
 import { importedImages } from '../helpers/importImages'; 
+import getPathFromUrl from '../helpers/getPathFromUrl';
 
 const ProductList = () => {
   const { user } = useUser();
@@ -13,11 +14,6 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [deleteProductId, setDeleteProductId] = useState(null);
-
-  const getPathFromUrl = (url) => {
-    const parsedUrl = new URL(url);
-    return parsedUrl.pathname.split('/').pop();
-  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -108,9 +104,9 @@ const ProductList = () => {
         <p>Loading...</p>
       )}
       {showPopup && (
-        <Popup 
+        <PopupDeleteUser 
           message="Are you sure you want to delete this product?" 
-          onClose={closePopup} 
+          onCancel={closePopup} 
           onConfirm={() => handleDelete(deleteProductId)}
         />
       )}

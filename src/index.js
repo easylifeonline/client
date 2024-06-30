@@ -3,13 +3,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createRoot } from "react-dom/client";
+import { UserProvider } from './components/UserContext';
+import { CartProvider } from './contexts/CartContext';
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <App tab="home" />
+    <UserProvider>
+      <CartProvider>
+        <App tab="home" />
+      </CartProvider>
+    </UserProvider>
   </React.StrictMode>
 );
 

@@ -1,0 +1,118 @@
+.quick-view-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    max-width: 250px; 
+    width: 90vw;
+    overflow-y: auto; 
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    p {
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .quantity-container {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+
+      label {
+        margin-right: 10px;
+        color: #333;
+      }
+
+      input {
+        width: 60px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+      }
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .add-to-cart-button,
+    .cancel-button {
+      padding: 10px;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart-button {
+      background-color: #28a745;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+
+    .cancel-button {
+      background-color: #dc3545;
+
+      &:hover {
+        background-color: #c82333;
+      }
+    }
+  }
+}
+
+// Media queries for small screens
+@media (max-width: 600px) {
+  .quick-view-modal .modal-content {
+    padding: 15px;
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    .add-to-cart-button,
+    .cancel-button {
+      padding: 8px;
+    }
+  }
+}

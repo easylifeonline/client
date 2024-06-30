@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import '../styles/views/Register.scss';
 import { useNavigate } from "react-router-dom";
-import { useUser } from "./UserContext"; // Import the context
-import Popup from './Popup'; // Import the Popup component
+import { useUser } from "./UserContext";
+import api from '../helpers/api';
+import Popup from './PopupForAll'; 
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -12,9 +12,9 @@ function Login() {
     });
 
     const navigate = useNavigate();
-    const { setUser } = useUser(); // Use the context to get the setUser function
-    const [errorMessage, setErrorMessage] = useState(''); // State for error message
-    const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
+    const { setUser } = useUser();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -27,25 +27,23 @@ function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8000/api/login/', formData);
+            const response = await api.post('login/', formData);
             
-            // Save tokens
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
             
-            // Fetch and set the user data
-            const userResponse = await axios.get("http://localhost:8000/api/profile/", {
+            const userResponse = await api.get("profile/", {
                 headers: {
                     Authorization: `Bearer ${response.data.access}`
                 }
             });
-            setUser(userResponse.data); // Update user in context
+            setUser(userResponse.data);
 
             navigate("/home");
         } catch (error) {
             console.error(error);
             setErrorMessage('Login failed: ' + (error.response?.data?.detail || error.message));
-            setShowPopup(true); // Show popup with error message
+            setShowPopup(true);
         }
     };
 
@@ -65,7 +63,6 @@ function Login() {
                         name="username" 
                         id="username" 
                         className="register-input" 
-                        placeholder="Username" 
                         onChange={handleChange} 
                     />
                 </div>
@@ -76,7 +73,6 @@ function Login() {
                         name="password" 
                         id="password" 
                         className="register-input" 
-                        placeholder="Password" 
                         onChange={handleChange} 
                     />
                 </div>
@@ -84,9 +80,12 @@ function Login() {
                     <button type="submit" className="button">Login</button>
                 </div>
             </form>
+            <div className="register-prompt">
+                Don't have an account? <a href="/register">Register here</a>.
+            </div>
 
             {showPopup && (
-                <Popup message={errorMessage} onClose={closePopup} />
+                <Popup title="Error" message={errorMessage} onClose={closePopup} />
             )}
         </div>
     );

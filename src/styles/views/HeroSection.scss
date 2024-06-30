@@ -1,0 +1,93 @@
+// HeroSection.scss
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    background-color: #94999e;
+    background-image: url("../../assets/swiss45.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #22bb67;
+  
+    .hero-content {
+      max-width: 50%;
+      
+      h1 {
+        font-size: 2.5rem;
+        color: #e01616;
+        margin-bottom: 20px;
+      }
+  
+      p {
+        font-size: 1.5rem;
+        color: #dd0d17;
+        margin-bottom: 30px;
+      }
+  
+      .cta-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: #fff;
+        background-color: #28a745;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+  
+        &:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 300%;
+          height: 300%;
+          background: rgba(255, 255, 255, 0.15);
+          transition: all 0.3s ease;
+          transform: translate(-50%, -50%) rotate(45deg);
+          z-index: -1;
+        }
+  
+        &:hover {
+          background-color: #218838;
+          transform: scale(1.1);
+  
+          &:before {
+            width: 400%;
+            height: 400%;
+            background: rgba(255, 255, 255, 0.25);
+          }
+        }
+  
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+    }
+  
+    @media (max-width: 768px) {
+      flex-direction: column;
+  
+      .hero-content {
+        max-width: 100%;
+        text-align: center;
+  
+        h1 {
+          font-size: 2rem;
+        }
+  
+        p {
+          font-size: 1rem;
+        }
+  
+        .cta-button {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }  
+  
