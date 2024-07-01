@@ -77,7 +77,7 @@ const Homepage = () => {
       {loading ? (
         <div className="loader-container">
           <BounceLoader color="#28be1a" size={100} />
-          <p>Loading categories...</p>
+          <p>Loading best sellers, new arrivals and most visited items...</p>
         </div>
       ) : (
         <>
