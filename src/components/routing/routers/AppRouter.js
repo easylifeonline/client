@@ -44,6 +44,7 @@ import VendorPolicy from "../../VendorPolicy";
 import OurServices from "../../OurServices"; 
 import Footer from "../../Footer";
 import ScrollToTop from "../../ScrollToTop"; 
+import Team from "../../Team";
 
 const AppRouter = () => {
   return (
@@ -62,6 +63,7 @@ const AppRouter = () => {
           <Route path="/about-us/our-story" element={<OurStory />} />
           <Route path="/about-us/careers" element={<Careers />} />
           <Route path="/about-us/press" element={<Press />} />
+          <Route path="/team" element={<Team />} />
           <Route path="/admin/vendor-policies" element={<AdminVendorPolicies />} />
           <Route path="/vendor-policies-guidelines" element={<VendorPolicy />} />
           <Route path="*" element={<NotFound />} />

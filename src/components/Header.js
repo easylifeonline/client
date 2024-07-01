@@ -139,6 +139,7 @@ const Header = ({ height }) => {
         )}
         {(!user || (user && user.role === "customer")) && (
           <>
+            <span className="nav-item" onClick={() => navigate("/team")}>Meet Our People</span>
             <span className="nav-item" onClick={() => navigate("/contact")}>Contact Us</span>
             <span className="nav-item" onClick={() => navigate("/about")}>About</span>
             <span className="nav-item" onClick={handleBecomeVendorClick}>Become a Vendor</span>
