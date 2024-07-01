@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { BeatLoader } from 'react-spinners';
 
 const OurServices = () => {
   const [categories, setCategories] = useState([]);
@@ -13,6 +14,8 @@ const OurServices = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const { cartItems } = useCart();
   const navigate = useNavigate();
+  const [openedCategory, setOpenedCategory] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -22,6 +25,8 @@ const OurServices = () => {
         groupCategories(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -67,71 +72,87 @@ const OurServices = () => {
     setSuggestions([]);
   };
 
+  const toggleCategory = (categoryId) => {
+    setOpenedCategory(prevCategory => prevCategory === categoryId ? null : categoryId);
+  };
+
+  const handleSubcategoryClick = (subcategory) => {
+    navigate(`/view-products/${subcategory.name}`);
+    setOpenedCategory(null);
+  };
+
   return (
     <div className="our-services">
-      <ul className="services-list">
-        {groupedCategories.map((category) => (
-          <li key={category.id} className="service-item">
-            <span
-              className="service-link"
-              onClick={() => navigate(`/view-products/${category.name}`)}
-            >
-              {category.name}
-            </span>
-            {category.subcategories.length > 0 && (
-              <ul className="subcategory-list">
-                {category.subcategories.map((subcategory) => (
-                  <li key={subcategory.id}>
-                    <span
-                      className="subcategory-link"
-                      onClick={() => navigate(`/view-products/${subcategory.name}`)}
-                    >
-                      {subcategory.name}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-      <div className="search-section">
-        <span
-          className="cart-icon-container"
-          title="Current items"
-          onClick={() => navigate('/cart')}
-        >
-          <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
-          {cartItems && cartItems.length > 0 && (
-            <div className="cart-item-count">{cartItems.length}</div>
-          )}
-        </span>
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search products..."
-            className="search-input"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <button className="search-button">
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-          {suggestions.length > 0 && (
-            <ul className="suggestions-list">
-              {suggestions.map((suggestion) => (
-                <li key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)}>
-                  {suggestion.title}
-                </li>
-              ))}
-            </ul>
-          )}
+      {loading ? (
+        <div className="loader-container">
+          <BeatLoader color="#14e028" />
+          <p>Loading categories...</p>
         </div>
-      </div>
+      ) : (
+        <>
+          <ul className="services-list">
+            {groupedCategories.map((category) => (
+              <li key={category.id} className="service-item">
+                <span
+                  className="service-link"
+                  onClick={() => toggleCategory(category.id)}
+                >
+                  {category.name}
+                </span>
+                {openedCategory === category.id && category.subcategories.length > 0 && (
+                  <ul className="subcategory-list">
+                    {category.subcategories.map((subcategory) => (
+                      <li key={subcategory.id}>
+                        <span
+                          className="subcategory-link"
+                          onClick={() => handleSubcategoryClick(subcategory)}
+                        >
+                          {subcategory.name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+          <div className="search-section">
+            <span
+              className="cart-icon-container"
+              title="Current items"
+              onClick={() => navigate('/cart')}
+            >
+              <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
+              {cartItems && cartItems.length > 0 && (
+                <div className="cart-item-count">{cartItems.length}</div>
+              )}
+            </span>
+            <div className="search-container">
+              <input
+                type="text"
+                placeholder="Search products..."
+                className="search-input"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <button className="search-button">
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+              {suggestions.length > 0 && (
+                <ul className="suggestions-list">
+                  {suggestions.map((suggestion) => (
+                    <li key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)}>
+                      {suggestion.title}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
 export default OurServices;
-
-
