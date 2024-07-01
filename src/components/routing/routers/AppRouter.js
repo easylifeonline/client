@@ -1,5 +1,3 @@
-// AppRouter.js
-
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "../../HomePage";
@@ -43,13 +41,14 @@ import Press from "../../Press";
 import ProductListAll from "../../ProductListAll";
 import AdminVendorPolicies from "../../AdminVendorPolicies";
 import VendorPolicy from "../../VendorPolicy";
+import OurServices from "../../OurServices";  // Import the OurServices component
 
 const AppRouter = () => {
   return (
     <UserProvider>
       <BrowserRouter>
-        {/* <GeneralHeader height="70px" /> */}
         <Header height="70px" />
+        <OurServices />  {/* Place OurServices component here */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
@@ -62,158 +61,33 @@ const AppRouter = () => {
           <Route path="/about-us/press" element={<Press />} />
           <Route path="/admin/vendor-policies" element={<AdminVendorPolicies />} />
           <Route path="/vendor-policies-guidelines" element={<VendorPolicy />} />
-            <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
 
-          {/* Use ProtectedRoute to wrap around components that require authentication */}
-          <Route
-            path="/home"
-            element={
-                <Home />
-            }
-          />
-
-          <Route
-            path="/products"
-            element={
-                <ProductListAll />
-            }
-          />
-
+          <Route path="/home" element={<Home />} />
+          <Route path="/products" element={<ProductListAll />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-summary/:orderId" element={<OrderSummary />} />
-
-          <Route
-            path="/contact"
-            element={
-                <Contact />
-            }
-          />
-
-          <Route
-            path="/contact-form"
-            element={
-                <ContactForm />
-            }
-          />
-
-          <Route
-            path="/vendor-contact-form"
-            element={
-                <VendorContactForm />
-            }
-          />
-
-          <Route
-            path="/vendor"
-            element={
-                <Vendor />
-            }
-          />
-
-          <Route
-            path="/admin/vendor-requests"
-            element={
-                <ViewVendorRequests />
-            }
-          />
-
-          <Route
-            path="/admin/add-category"
-            element={
-                <CategoryForm />
-            }
-          />
-
-          <Route
-            path="/view-categories"
-            element={
-                <ViewCategories />
-            }
-          />
-
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact-form" element={<ContactForm />} />
+          <Route path="/vendor-contact-form" element={<VendorContactForm />} />
+          <Route path="/vendor" element={<Vendor />} />
+          <Route path="/admin/vendor-requests" element={<ViewVendorRequests />} />
+          <Route path="/admin/add-category" element={<CategoryForm />} />
+          <Route path="/view-categories" element={<ViewCategories />} />
           <Route path="/update-product/:productId" element={<UpdateProduct />} />
-
-          <Route
-            path="/about"
-            element={
-                <About />
-            }
-          />
-
-          <Route
-            path="/faqs"
-            element={
-                <FAQs />
-            }
-          />
-
-          <Route
-            path="/terms"
-            element={
-                <TermsOfService />
-            }
-          />
-
-          <Route
-            path="/helpcenter"
-            element={
-                <HelpCenter />
-            }
-          />
-          
-          <Route
-            path="/addresses"
-            element={
-              <ProtectedRoute>
-                <UserAddresses />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <UserProfile />
-            } 
-          />
-          <Route
-            path="/profile/update"
-            element={
-              <ProtectedRoute>
-                <UpdateUserDetail />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/vendor/products"
-            element={
-                <ProductList />
-            }
-          />
-          <Route
-            path="/vendor/add-product"
-            element={
-                <AddProduct />
-            }
-          />
-            <Route
-                path="/vendor/inventory"
-                element={
-                    <InventoryManagement />
-                }
-            />
-            <Route
-                path="/admin/dashboard"
-                element={
-                    <AdminDashboard />
-                }
-            />
-            <Route
-                path="/products/:id"
-                element={
-                    <ProductDetail />
-                }
-            />
+          <Route path="/about" element={<About />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/helpcenter" element={<HelpCenter />} />
+          <Route path="/addresses" element={<ProtectedRoute><UserAddresses /></ProtectedRoute>} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/profile/update" element={<ProtectedRoute><UpdateUserDetail /></ProtectedRoute>} />
+          <Route path="/vendor/products" element={<ProductList />} />
+          <Route path="/vendor/add-product" element={<AddProduct />} />
+          <Route path="/vendor/inventory" element={<InventoryManagement />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>

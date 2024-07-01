@@ -4,6 +4,7 @@ import '../styles/views/OurServices.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../contexts/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const OurServices = () => {
   const [categories, setCategories] = useState([]);
@@ -11,6 +12,7 @@ const OurServices = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const { cartItems } = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -70,16 +72,22 @@ const OurServices = () => {
       <ul className="services-list">
         {groupedCategories.map((category) => (
           <li key={category.id} className="service-item">
-            <a href={`/view-products/${category.name}`} className="service-link">
+            <span
+              className="service-link"
+              onClick={() => navigate(`/view-products/${category.name}`)}
+            >
               {category.name}
-            </a>
+            </span>
             {category.subcategories.length > 0 && (
               <ul className="subcategory-list">
                 {category.subcategories.map((subcategory) => (
                   <li key={subcategory.id}>
-                    <a href={`/view-products/${subcategory.name}`} className="subcategory-link">
+                    <span
+                      className="subcategory-link"
+                      onClick={() => navigate(`/view-products/${subcategory.name}`)}
+                    >
                       {subcategory.name}
-                    </a>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -88,12 +96,16 @@ const OurServices = () => {
         ))}
       </ul>
       <div className="search-section">
-        <a href="/cart" className="cart-icon-container" title="Current items">
+        <span
+          className="cart-icon-container"
+          title="Current items"
+          onClick={() => navigate('/cart')}
+        >
           <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
           {cartItems && cartItems.length > 0 && (
             <div className="cart-item-count">{cartItems.length}</div>
           )}
-        </a>
+        </span>
         <div className="search-container">
           <input
             type="text"
