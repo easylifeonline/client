@@ -19,20 +19,6 @@ const Homepage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const productResponse = await api.get('products/');
-        setProducts(productResponse.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        setErrorMessage('Failed to load products. Please try again later.');
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await api.get('categories/');
@@ -87,6 +73,7 @@ const Homepage = () => {
 
   return (
     <div className="homepage-container">
+      <HeroSection />
       {loading ? (
         <div className="loader-container">
           <BounceLoader color="#28be1a" size={100} />
@@ -94,19 +81,19 @@ const Homepage = () => {
         </div>
       ) : (
         <>
-          <HeroSection />
           <FeaturedProducts title="Best Sellers" type="best-sellers" />
           <FeaturedProducts title="New Arrivals" type="new-arrivals" />
           <FeaturedProducts title="Most Visited" type="most-visited" />
-          <PromotionalBanner image="/images/iphone15_pro.png" title="Big Sale!" subtitle="Up to 50% off on selected items" />
-          <CategoriesOverview categories={categoriesData} />
-          <CustomerTestimonials testimonials={testimonials} />
-          <NewsletterSignup />
         </>
       )}
+      <PromotionalBanner image="/images/iphone15_pro.png" title="Big Sale!" subtitle="Up to 50% off on selected items" />
+      <CategoriesOverview categories={categoriesData} />
+      <CustomerTestimonials testimonials={testimonials} />
+      <NewsletterSignup />
     </div>
   );
 };
 
 export default Homepage;
+
 
