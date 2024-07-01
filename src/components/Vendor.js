@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/views/Vendor.scss';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from './UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faFileAlt, faPaperPlane, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import Popup from './VendorPopup';
 
 const Vendor = () => {
-    const navigate = useNavigate();
-    const { user } = useUser();
+  const navigate = useNavigate();
+  const { user } = useUser();
+  const [popupContent, setPopupContent] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
 
-    const handleVendorClick = () => {
-        if (!user) {
-          navigate("/register");
-        } else {
-          navigate("/vendor-contact-form");
-        }
-    };
+  const handleVendorClick = () => {
+    if (!user) {
+      navigate("/register");
+    } else {
+      navigate("/vendor-contact-form");
+    }
+  };
+
+  const handlePopupOpen = (content) => {
+    setPopupContent(content);
+    setShowPopup(true);
+  };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+    setPopupContent('');
+  };
 
   return (
     <div className="vendor-container">
@@ -79,12 +92,16 @@ const Vendor = () => {
         <h3>Important Information</h3>
         <p>Make sure to review our vendor policies and guidelines to ensure a smooth onboarding process and successful experience on our platform.</p>
         <ul>
-          <li>Vendor policies and guidelines</li>
-          <li>Product listing requirements</li>
-          <li>Payment and commission details</li>
-          <li>Support and contact information</li>
+          <li onClick={() => navigate('/vendor-policies-guidelines')}>Vendor policies and guidelines</li>
+          <li onClick={() => handlePopupOpen('Product listing requirements content goes here.')}>Product listing requirements</li>
+          <li onClick={() => handlePopupOpen('Payment and commission details content goes here.')}>Payment and commission details</li>
+          <li onClick={() => handlePopupOpen('Support and contact information content goes here.')}>Support and contact information</li>
         </ul>
       </div>
+
+      {showPopup && (
+        <Popup content={popupContent} onClose={handlePopupClose} />
+      )}
     </div>
   );
 };

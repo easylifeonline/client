@@ -36,11 +36,19 @@ import ShoppingCart from '../../ShoppingCart';
 import Checkout from '../../Checkout';
 import OrderSummary from '../../OrderSummary';
 import ViewProductByCategory from "../../ViewProductByCategory";
+import GeneralHeader from "../../HeaderGeneral";
+import OurStory from "../../OurStory";
+import Careers from "../../Careers";
+import Press from "../../Press";
+import ProductListAll from "../../ProductListAll";
+import AdminVendorPolicies from "../../AdminVendorPolicies";
+import VendorPolicy from "../../VendorPolicy";
 
 const AppRouter = () => {
   return (
     <UserProvider>
       <BrowserRouter>
+        {/* <GeneralHeader height="70px" /> */}
         <Header height="70px" />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -49,6 +57,11 @@ const AppRouter = () => {
           <Route path="/view-products/:category" element={<ViewProductByCategory />} />
           <Route path="/password_reset" element={<PasswordResetRequest />} /> 
           <Route path="/reset/:uidb64/:token" element={<PasswordResetConfirm />} />
+          <Route path="/about-us/our-story" element={<OurStory />} />
+          <Route path="/about-us/careers" element={<Careers />} />
+          <Route path="/about-us/press" element={<Press />} />
+          <Route path="/admin/vendor-policies" element={<AdminVendorPolicies />} />
+          <Route path="/vendor-policies-guidelines" element={<VendorPolicy />} />
             <Route path="*" element={<NotFound />} />
 
           {/* Use ProtectedRoute to wrap around components that require authentication */}
@@ -56,6 +69,13 @@ const AppRouter = () => {
             path="/home"
             element={
                 <Home />
+            }
+          />
+
+          <Route
+            path="/products"
+            element={
+                <ProductListAll />
             }
           />
 

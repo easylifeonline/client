@@ -1,126 +1,132 @@
 .vendor-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 135px;
-  
-    h2, h3 {
-      text-align: center;
-      color: #333;
-    }
-  
-    p {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 135px;
+
+  h2, h3 {
+    text-align: center;
+    color: #333;
+  }
+
+  p {
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .section {
+    margin-bottom: 30px;
+
+    ul, ol {
+      padding-left: 20px;
       color: #555;
       line-height: 1.6;
-    }
-  
-    .section {
-      margin-bottom: 30px;
-  
-      ul, ol {
-        padding-left: 20px;
-        color: #555;
-        line-height: 1.6;
-  
-        li {
-          margin-bottom: 10px;
-        }
-      }
-    }
-  
-    .steps-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-  
-      .step-box {
-        flex: 1;
-        min-width: 150px;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 15px;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: background-color 0.3s ease-in-out;
-  
-        &:nth-child(1) {
-          background-color: #E8F5E9; // Light green
-        }
-        &:nth-child(2) {
-          background-color: #FFFDE7; // Light yellow
-        }
-        &:nth-child(3) {
-          background-color: #E3F2FD; // Light blue
-        }
-        &:nth-child(4) {
-          background-color: #F3E5F5; // Light purple
-        }
-  
-        .step-number {
-          font-size: 24px;
-          font-weight: bold;
-          color: #4CAF50;
-          margin-bottom: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-  
-          .step-icon {
-            margin-right: 10px;
-          }
-        }
-  
-        .step-description {
-          color: #333;
-          font-size: 16px;
-        }
-  
+
+      li {
+        margin-bottom: 10px;
+        cursor: pointer;
+        color: #007bff;
+
         &:hover {
-          background-color: #D7CCC8; // Grey for hover
+          text-decoration: underline;
         }
-      }
-    }
-  
-    .vendor-button {
-      display: block;
-      width: 200px; // Reduced width
-      padding: 10px;
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 18px;
-      text-align: center;
-      margin: 0 auto; // Center the button
-  
-      &:hover {
-        background-color: #45a049;
-      }
-    }
-  
-    @media (max-width: 768px) {
-      padding: 10px;
-  
-      h2, h3 {
-        font-size: 20px;
-      }
-  
-      p, .step-description {
-        font-size: 14px;
-      }
-  
-      .step-number {
-        font-size: 20px;
       }
     }
   }
-  
+
+  .steps-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .step-box {
+      flex: 1;
+      min-width: 150px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease-in-out;
+
+      &:nth-child(1) {
+        background-color: #E8F5E9; // Light green
+      }
+      &:nth-child(2) {
+        background-color: #FFFDE7; // Light yellow
+      }
+      &:nth-child(3) {
+        background-color: #E3F2FD; // Light blue
+      }
+      &:nth-child(4) {
+        background-color: #F3E5F5; // Light purple
+      }
+
+      .step-number {
+        font-size: 24px;
+        font-weight: bold;
+        color: #4CAF50;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .step-icon {
+          margin-right: 10px;
+        }
+      }
+
+      .step-description {
+        color: #333;
+        font-size: 16px;
+      }
+
+      &:hover {
+        background-color: #D7CCC8; // Grey for hover
+      }
+    }
+  }
+
+  .vendor-button {
+    display: block;
+    width: 200px; // Reduced width
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    margin: 0 auto; // Center the button
+
+    &:hover {
+      background-color: #45a049;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
+
+    h2, h3 {
+      font-size: 20px;
+    }
+
+    p, .step-description {
+      font-size: 14px;
+    }
+
+    .step-number {
+      font-size: 20px;
+    }
+  }
+}
+
   
   

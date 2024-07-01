@@ -1,41 +1,109 @@
 import React from 'react';
 import '../styles/views/About.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faHandshake, faStar, faUserShield, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 const About = () => {
   return (
-    <div className="about-container">
-      <h1>About EasyLife</h1>
-      <p>Welcome to EasyLife, your trusted E-Commerce Marketplace! We are committed to providing the best online shopping experience. Our platform connects vendors and customers, offering a wide range of products at competitive prices.</p>
-      
-      <h2>Our Mission</h2>
-      <p>Our mission is to empower small businesses by providing them with a platform to reach a larger audience. We strive to offer a seamless shopping experience for our customers, with easy navigation, secure payment options, and reliable customer service.</p>
-      
-      <h2>Core Values</h2>
-      <ul>
-        <li><FontAwesomeIcon icon={faCheckCircle} size="lg" /> <span className="core-value integrity">Integrity</span>: We operate with honesty and integrity in all our dealings.</li>
-        <li><FontAwesomeIcon icon={faUserShield} size="lg" /> <span className="core-value customer-focus">Customer Focus</span>: Our customers are at the heart of everything we do.</li>
-        <li><FontAwesomeIcon icon={faLightbulb} size="lg" /> <span className="core-value innovation">Innovation</span>: We continuously seek innovative solutions to improve our services.</li>
-        <li><FontAwesomeIcon icon={faStar} size="lg" /> <span className="core-value quality">Quality</span>: We are committed to providing high-quality products and services.</li>
-        <li><FontAwesomeIcon icon={faHandshake} size="lg" /> <span className="core-value community">Community</span>: We support and empower our vendor community.</li>
-      </ul>
-      
-      <h2>Why Choose Us</h2>
-      <p>At EasyLife, we offer:</p>
-      <ul>
-        <li><FontAwesomeIcon icon={faCheckCircle} size="lg" /> A wide range of products at competitive prices</li>
-        <li><FontAwesomeIcon icon={faCheckCircle} size="lg" /> Secure and easy payment options</li>
-        <li><FontAwesomeIcon icon={faCheckCircle} size="lg" /> Reliable customer service</li>
-        <li><FontAwesomeIcon icon={faCheckCircle} size="lg" /> Fast and reliable shipping</li>
-        <li><FontAwesomeIcon icon={faCheckCircle} size="lg" /> A user-friendly shopping experience</li>
-      </ul>
-      
-      <h2>Get in Touch</h2>
-      <p>If you have any questions or need assistance, feel free to contact us through our <a href="/contact">Contact Us</a> page. We are here to help!</p>
+    <div className="about-us">
+      <h2>About EasyLife</h2>
+
+      <section>
+        <h3>Introduction</h3>
+        <p>
+          Welcome to EasyLife, your premier destination for an exceptional online shopping experience. Founded in 2024, EasyLife connects vendors and businesses with customers worldwide, bringing the best of e-commerce to your fingertips.
+        </p>
+      </section>
+
+      <section>
+        <h3>Our Mission</h3>
+        <p>
+          At EasyLife, our mission is to empower small businesses and vendors to reach a broader audience while providing customers with a diverse range of high-quality products. We believe in creating opportunities for growth and success for every business, no matter how small.
+        </p>
+      </section>
+
+      <section>
+        <h3>Our Vision</h3>
+        <p>
+          We aspire to revolutionize online shopping by creating a seamless and enjoyable experience for both vendors and customers. Our vision is to become the go-to platform for online shopping, known for our innovation, customer service, and community involvement.
+        </p>
+      </section>
+
+      <section>
+        <h3>Our Values</h3>
+        <ul>
+          <li><strong>Integrity</strong>: We operate with honesty and transparency in all our interactions.</li>
+          <li><strong>Customer Focus</strong>: Our customers are at the heart of everything we do.</li>
+          <li><strong>Innovation</strong>: We continuously innovate to improve the shopping experience.</li>
+          <li><strong>Quality</strong>: We are committed to providing high-quality products and services.</li>
+          <li><strong>Community</strong>: We believe in giving back to the community and supporting sustainable practices.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>Unique Selling Propositions</h3>
+        <ul>
+          <li>Wide Range of Products: Discover a diverse selection of products from vendors around the world.</li>
+          <li>Secure Payments: Shop with confidence with our secure payment processing.</li>
+          <li>User-Friendly Interface: Enjoy a seamless and intuitive shopping experience.</li>
+          <li>Vendor Support: Access tools and resources to help your business thrive.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>Customer Commitment</h3>
+        <p>
+          We are dedicated to ensuring your satisfaction with every purchase. Our customer service team is available to assist you with any questions or concerns, and our flexible return policy ensures a hassle-free shopping experience.
+        </p>
+      </section>
+
+      <section>
+        <h3>Supporting Our Vendors</h3>
+        <p>
+          EasyLife provides vendors with a platform to grow their business. With comprehensive sales analytics, secure payment processing, and dedicated support, we help vendors succeed and reach a wider audience.
+        </p>
+      </section>
+
+      <section>
+        <h3>Technological Innovation</h3>
+        <p>
+          Our platform leverages cutting-edge technology to provide a fast, secure, and enjoyable shopping experience. From advanced search features to personalized recommendations, we are always looking for ways to enhance your experience.
+        </p>
+      </section>
+
+      <section>
+        <h3>Community and Social Responsibility</h3>
+        <p>
+          EasyLife is committed to making a positive impact on the community. We partner with charitable organizations and promote sustainable practices to ensure a better future for all.
+        </p>
+      </section>
+
+      <section>
+        <h3>Achievements and Milestones</h3>
+        <p>
+          Since our launch, we have reached several significant milestones, including [notable achievements, awards, or partnerships].
+        </p>
+      </section>
+
+      <section>
+        <h3>Future Plans</h3>
+        <p>
+          We are excited about the future and are continuously working on new features and improvements. Stay tuned for [upcoming features or initiatives].
+        </p>
+      </section>
+
+      <section>
+        <h3>Join Us</h3>
+        <p>
+          Explore our platform, discover amazing products, and become a part of the EasyLife community. <a href="/products">Start Shopping</a> | <a href="/vendor">Become a Vendor</a> | <a href="/contact">Contact Us</a>
+        </p>
+      </section>
+
+      <div className="easylife-team">
+        <strong>EasyLife Team</strong>
+      </div>
     </div>
   );
 };
 
 export default About;
+
 

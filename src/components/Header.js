@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "./UserContext";
 import Popup from "./Popup";
+import OurStory from "./OurStory";
+import Careers from "./Careers";
+import Press from "./Press";
+
 
 const Header = ({ height }) => {
   const navigate = useNavigate();
@@ -117,6 +121,7 @@ const Header = ({ height }) => {
               <span onClick={() => navigate("/admin/add-category")}>Add a Product Category</span>
               <span onClick={() => navigate("/view-categories")}>View Product Categories</span>
               <span onClick={() => navigate("/admin/vendor-requests")}>Vendor Requests</span>
+              <span onClick={() => navigate("/admin/vendor-policies")}>Vendor Policies</span>
             </div>
           </div>
         )}
@@ -134,9 +139,12 @@ const Header = ({ height }) => {
         )}
         {(!user || (user && user.role === "customer")) && (
           <>
-            <span className="nav-item" onClick={() => navigate("/contact")}>Contact</span>
+            <span className="nav-item" onClick={() => navigate("/contact")}>Contact Us</span>
             <span className="nav-item" onClick={() => navigate("/about")}>About</span>
             <span className="nav-item" onClick={handleBecomeVendorClick}>Become a Vendor</span>
+            <span className="nav-item" onClick={() => navigate("/about-us/our-story")}>Our Story</span>
+            <span className="nav-item" onClick={() => navigate("/about-us/careers")}>Careers</span>
+            <span className="nav-item" onClick={() => navigate("/about-us/press")}>Press</span>
           </>
         )}
       </div>

@@ -1,110 +1,70 @@
-.about-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 135px;
-  
-    h1, h2 {
-      text-align: center;
-      color: #333;
-      font-weight: bold;
-      margin-bottom: 20px;
+.about-us {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 135px;
+
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  section {
+    margin-bottom: 20px;
+
+    h3 {
+      color: #4CAF50;
+      margin-bottom: 10px;
+      text-align: center;  /* Centered h3 elements */
     }
-  
-    h1 {
-      font-size: 32px;
-      color: #007bff;
-    }
-  
-    h2 {
-      font-size: 24px;
-      color: #28a745;
-    }
-  
-    p, ul {
-      margin-bottom: 20px;
+
+    p {
       color: #555;
       line-height: 1.6;
     }
-  
+
     ul {
-      list-style-type: none; /* Remove default bullets */
-      padding-left: 0;
-  
+      list-style: none;
+      padding: 0;
+
       li {
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        
-        svg {
-          margin-right: 10px; /* Space between icon and text */
-          color: #007bff; /* Icon color */
-          font-size: 24px; /* Increase icon size */
-        }
-  
-        .core-value {
-          font-weight: bold;
-        }
-  
-        .integrity {
-          color: #ff5733; /* Red */
-        }
-  
-        .customer-focus {
-          color: #28a745; /* Green */
-        }
-  
-        .innovation {
-          color: #ffc107; /* Yellow */
-        }
-  
-        .quality {
-          color: #17a2b8; /* Teal */
-        }
-  
-        .community {
-          color: #6f42c1; /* Purple */
+        color: #555;
+        line-height: 1.6;
+        position: relative;
+        padding-left: 25px;
+
+        &:before {
+          content: '✔';
+          position: absolute;
+          left: 0;
+          color: #4CAF50;
         }
       }
     }
-  
+
     a {
       color: #007bff;
       text-decoration: none;
-  
+
       &:hover {
         text-decoration: underline;
       }
     }
-  
-    @media (max-width: 768px) {
-      padding: 10px;
-  
-      h1 {
-        font-size: 24px;
-      }
-  
-      h2 {
-        font-size: 18px;
-      }
-  
-      p, ul {
-        font-size: 14px;
-      }
-  
-      ul li {
-        svg {
-          margin-right: 5px;
-          font-size: 20px; /* Adjust icon size for smaller screens */
-        }
-      }
-    }
   }
-  
+
+  .easylife-team {
+    text-align: center;
+    color: #333;
+    margin-top: 40px;
+    font-size: 18px;
+  }
+}
+
+
   
   
   

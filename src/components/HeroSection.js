@@ -8,7 +8,7 @@ const HeroSection = () => {
       <div className="hero-content">
         <h1>Discover Our Latest Collection</h1>
         <p>Explore the new arrivals in electronics, fashion, home, and more.</p>
-        <a href="/shop" className="cta-button">Shop Now</a>
+        <a href="/products" className="cta-button">Shop Now</a>
       </div>
     </section>
   );
