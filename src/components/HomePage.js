@@ -59,25 +59,25 @@ const Homepage = () => {
       id: 1,
       text: "EasyLife Marketplace has transformed the way I shop. The convenience and variety are unmatched!",
       author: "Jane Doe",
-      date: "2023-05-10",
+      date: "2024-07-01",
       time: "14:30",
-      country: "USA"
+      country: "France"
     },
     {
       id: 2,
       text: "I love the quick delivery and the quality of the products. Highly recommend EasyLife Marketplace!",
       author: "John Smith",
-      date: "2023-05-12",
+      date: "2024-07-01",
       time: "09:15",
-      country: "Canada"
+      country: "Switzerland"
     },
     {
       id: 3,
       text: "Great customer service and amazing deals. I always find what I'm looking for.",
       author: "Alice Johnson",
-      date: "2023-05-14",
+      date: "2024-07-01",
       time: "11:45",
-      country: "UK"
+      country: "Germany"
     }
   ]; 
 

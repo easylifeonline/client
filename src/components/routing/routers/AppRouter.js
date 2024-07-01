@@ -41,14 +41,17 @@ import Press from "../../Press";
 import ProductListAll from "../../ProductListAll";
 import AdminVendorPolicies from "../../AdminVendorPolicies";
 import VendorPolicy from "../../VendorPolicy";
-import OurServices from "../../OurServices";  // Import the OurServices component
+import OurServices from "../../OurServices"; 
+import Footer from "../../Footer";
+import ScrollToTop from "../../ScrollToTop"; 
 
 const AppRouter = () => {
   return (
     <UserProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Header height="70px" />
-        <OurServices />  {/* Place OurServices component here */}
+        <OurServices />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
@@ -62,7 +65,6 @@ const AppRouter = () => {
           <Route path="/admin/vendor-policies" element={<AdminVendorPolicies />} />
           <Route path="/vendor-policies-guidelines" element={<VendorPolicy />} />
           <Route path="*" element={<NotFound />} />
-
           <Route path="/home" element={<Home />} />
           <Route path="/products" element={<ProductListAll />} />
           <Route path="/cart" element={<ShoppingCart />} />
@@ -89,6 +91,7 @@ const AppRouter = () => {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/products/:id" element={<ProductDetail />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </UserProvider>
   );

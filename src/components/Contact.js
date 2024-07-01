@@ -19,13 +19,19 @@ const Contact = () => {
   });
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false); 
-  const [popup, setPopup] = useState({ show: false, title: '', message: '' }); // State for popup
+  const [popup, setPopup] = useState({ show: false, title: '', message: '' }); 
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+
+    // Navigate to /vendor if subject is Vendor Application
+    if (name === 'subject' && value === 'Vendor Application') {
+      navigate('/vendor');
+    }
   };
 
   const handleSearchChange = (e) => {
@@ -152,6 +158,7 @@ const Contact = () => {
 };
 
 export default Contact;
+
 
 
 

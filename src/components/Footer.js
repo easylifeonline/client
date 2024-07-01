@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import "../styles/views/Footer.scss";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -15,13 +18,13 @@ const Footer = () => {
         <div className="footer-section links">
           <h2>Quick Links</h2>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/helpcenter">Help Center</a></li>
-            <li><a href="/faqs">FAQs</a></li>
+            <li><span onClick={() => navigate("/")}>Home</span></li>
+            <li><span onClick={() => navigate("/about")}>About</span></li>
+            <li><span onClick={() => navigate("/contact")}>Contact</span></li>
+            <li><span onClick={() => navigate("/terms")}>Terms of Service</span></li>
+            <li><span onClick={() => navigate("/privacy")}>Privacy Policy</span></li>
+            <li><span onClick={() => navigate("/helpcenter")}>Help Center</span></li>
+            <li><span onClick={() => navigate("/faqs")}>FAQs</span></li>
           </ul>
         </div>
         <div className="footer-section contact">

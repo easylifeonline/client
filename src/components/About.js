@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/views/About.scss';
 
 const About = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="about-us">
       <h2>About EasyLife</h2>
@@ -93,8 +96,13 @@ const About = () => {
       <section>
         <h3>Join Us</h3>
         <p>
-          Explore our platform, discover amazing products, and become a part of the EasyLife community. <a href="/products">Start Shopping</a> | <a href="/vendor">Become a Vendor</a> | <a href="/contact">Contact Us</a>
+          Explore our platform, discover amazing products, and become a part of the EasyLife community.
         </p>
+        <div className="links-container">
+          <span className="link" onClick={() => navigate('/products')}>Start Shopping</span> | 
+          <span className="link" onClick={() => navigate('/vendor')}>Become a Vendor</span> | 
+          <span className="link" onClick={() => navigate('/contact')}>Contact Us</span>
+        </div>
       </section>
 
       <div className="easylife-team">

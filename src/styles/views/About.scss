@@ -46,13 +46,24 @@
       }
     }
 
-    a {
+    a, .link {
       color: #007bff;
       text-decoration: none;
+      transition: color 0.3s;
 
       &:hover {
+        color: #0056b3;
         text-decoration: underline;
       }
+    }
+  }
+
+  .links-container {
+    text-align: center;
+    margin-top: 10px;
+
+    .link {
+      margin: 0 10px;
     }
   }
 
@@ -63,8 +74,6 @@
     font-size: 18px;
   }
 }
-
-
   
   
   
