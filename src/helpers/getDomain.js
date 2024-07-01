@@ -10,6 +10,6 @@ export const getDomain = () => {
   const prodUrl = "https://server-ecommerce-1pvv.onrender.com/api/"
   const devUrl = 'http://localhost:8000/api/'
 
-  // return isProduction() ? prodUrl : devUrl
-  return prodUrl
+  return isProduction() ? prodUrl : devUrl
+  // return prodUrl
 }

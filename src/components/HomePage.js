@@ -98,7 +98,7 @@ const Homepage = () => {
           <FeaturedProducts title="Best Sellers" type="best-sellers" />
           <FeaturedProducts title="New Arrivals" type="new-arrivals" />
           <FeaturedProducts title="Most Visited" type="most-visited" />
-          <PromotionalBanner image="/images/swiss45.jpeg" title="Big Sale!" subtitle="Up to 50% off on selected items" />
+          <PromotionalBanner image="/images/iphone15_pro.png" title="Big Sale!" subtitle="Up to 50% off on selected items" />
           <CategoriesOverview categories={categoriesData} />
           <CustomerTestimonials testimonials={testimonials} />
           <NewsletterSignup />

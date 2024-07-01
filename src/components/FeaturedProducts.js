@@ -50,16 +50,23 @@ const FeaturedProducts = ({ title, type }) => {
   return (
     <section className="featured-products">
       <h2>{title}</h2>
-      <div className="products-grid">
-        {products.map((product) => (
-          <div key={product.id} className="product-item">
-            <img src={importedImages[getPathFromUrl(product.image)]} alt={product.title} />
-            <h3>{product.title}</h3>
-            <p>${product.price}</p>
-            <button onClick={() => handleQuickView(product)}>Quick View</button>
-          </div>
-        ))}
-      </div>
+      {products.length > 0 ? (
+        <div className="products-grid">
+          {products.map((product) => (
+            <div key={product.id} className="product-item">
+              <img src={importedImages[getPathFromUrl(product.image)]} alt={product.title} />
+              <h3>{product.title}</h3>
+              <p>${product.price}</p>
+              <button onClick={() => handleQuickView(product)}>Quick View</button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="no-products">
+          <img src="/images/coming.png" alt="Coming Soon" />
+          <p>No products available at the moment. Check back later!</p>
+        </div>
+      )}
       {quickViewProduct && (
         <QuickViewModal
           product={quickViewProduct}
