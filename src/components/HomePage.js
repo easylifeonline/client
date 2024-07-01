@@ -9,12 +9,14 @@ import CustomerTestimonials from './CustomerTestimonials';
 import NewsletterSignup from './NewsletterSignup';
 import categoryDescriptions from '../models/categoryDescriptions';
 import categoryPictures from '../models/categoryPictures';
+import { BounceLoader } from 'react-spinners';
 
 const Homepage = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [categoriesData, setCategoriesData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,11 +45,13 @@ const Homepage = () => {
           id: category.id,
           name: category.name,
           image: categoryPictures[category.name],
-          description: categoryDescriptions[category.name] 
+          description: categoryDescriptions[category.name]
         }));
         setCategoriesData(formattedCategories);
       } catch (error) {
         console.error("Error fetching categories:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -79,18 +83,27 @@ const Homepage = () => {
       time: "11:45",
       country: "Germany"
     }
-  ]; 
+  ];
 
   return (
     <div className="homepage-container">
-      <HeroSection />
-      <FeaturedProducts title="Best Sellers" type="best-sellers" />
-      <FeaturedProducts title="New Arrivals" type="new-arrivals" />
-      <FeaturedProducts title="Most Visited" type="most-visited" />
-      <PromotionalBanner image="/images/swiss45.jpeg" title="Big Sale!" subtitle="Up to 50% off on selected items" />
-      <CategoriesOverview categories={categoriesData} />
-      <CustomerTestimonials testimonials={testimonials} />
-      <NewsletterSignup />
+      {loading ? (
+        <div className="loader-container">
+          <BounceLoader color="#28be1a" size={100} />
+          <p>Loading categories...</p>
+        </div>
+      ) : (
+        <>
+          <HeroSection />
+          <FeaturedProducts title="Best Sellers" type="best-sellers" />
+          <FeaturedProducts title="New Arrivals" type="new-arrivals" />
+          <FeaturedProducts title="Most Visited" type="most-visited" />
+          <PromotionalBanner image="/images/swiss45.jpeg" title="Big Sale!" subtitle="Up to 50% off on selected items" />
+          <CategoriesOverview categories={categoriesData} />
+          <CustomerTestimonials testimonials={testimonials} />
+          <NewsletterSignup />
+        </>
+      )}
     </div>
   );
 };
