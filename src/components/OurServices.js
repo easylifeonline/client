@@ -86,7 +86,7 @@ const OurServices = () => {
       {loading ? (
         <div className="loader-container">
           <BeatLoader color="#14e028" />
-          <p>Loading categories...</p>
+          <p>Loading categories... (Currently using the Free Plan Service of Render, it might take up to 1min to connect.)</p>
         </div>
       ) : (
         <>

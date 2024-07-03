@@ -3,7 +3,8 @@ import '../styles/views/Register.scss';
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UserContext";
 import api from '../helpers/api';
-import Popup from './PopupForAll'; 
+import Popup from './PopupForAll';
+import { BeatLoader } from 'react-spinners';
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ function Login() {
     const { setUser } = useUser();
     const [errorMessage, setErrorMessage] = useState('');
     const [showPopup, setShowPopup] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -25,6 +27,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         try {
             const response = await api.post('login/', formData);
@@ -44,6 +47,8 @@ function Login() {
             console.error(error);
             setErrorMessage('Login failed: ' + (error.response?.data?.detail || error.message));
             setShowPopup(true);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -64,6 +69,7 @@ function Login() {
                         id="username" 
                         className="register-input" 
                         onChange={handleChange} 
+                        required
                     />
                 </div>
                 <div className="register-field">
@@ -74,10 +80,13 @@ function Login() {
                         id="password" 
                         className="register-input" 
                         onChange={handleChange} 
+                        required
                     />
                 </div>
                 <div className="register-button-container">
-                    <button type="submit" className="button">Login</button>
+                    <button type="submit" className="button" disabled={isLoading}>
+                        {isLoading ? <BeatLoader size={15} color="#14e028" /> : "Login"}
+                    </button>
                 </div>
             </form>
             <div className="register-prompt">
@@ -92,3 +101,4 @@ function Login() {
 }
 
 export default Login;
+

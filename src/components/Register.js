@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import '../styles/views/Register.scss'; 
+import '../styles/views/Register.scss';
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UserContext";
 import api from '../helpers/api';
+import { BeatLoader } from 'react-spinners';
 
 function Register() {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Register() {
         first_name: '',
         last_name: ''
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -31,6 +33,8 @@ function Register() {
             return;
         }
 
+        setIsLoading(true);
+
         try {
             await api.post('register/', formData);
             alert("Registration successful");
@@ -38,7 +42,9 @@ function Register() {
             await loginUser();
         } catch (error) {
             console.error(error);
-            alert("Registration failed: " + error.response?.data?.detail || "An error occurred while registering");
+            alert("Registration failed: " + (error.response?.data?.detail || "An error occurred while registering"));
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -135,7 +141,9 @@ function Register() {
                     />
                 </div>
                 <div className="register-button-container">
-                    <button type="submit" className="button">Register</button>
+                    <button type="submit" className="button" disabled={isLoading}>
+                        {isLoading ? <BeatLoader size={15} color="#14e028" /> : "Register"}
+                    </button>
                 </div>
             </form>
             <div className="register-prompt">
