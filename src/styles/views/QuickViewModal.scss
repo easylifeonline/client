@@ -15,9 +15,9 @@
     padding: 20px;
     border-radius: 5px;
     position: relative;
-    max-width: 250px; 
+    max-width: 500px; 
     width: 90vw;
-    overflow-y: auto; 
+    overflow-y: auto;
 
     .close-button {
       position: absolute;
@@ -29,11 +29,42 @@
       cursor: pointer;
     }
 
-    img {
-      width: 100%;
-      max-width: 200px;
-      height: auto;
-      margin-bottom: 20px;
+    .image-container {
+      position: relative;
+      text-align: center;
+
+      img {
+        width: 100%;
+        height: auto;
+        max-width: 200px;
+        margin-bottom: 20px;
+      }
+
+      .prev-button,
+      .next-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: green;
+        cursor: pointer;
+        font-weight: bold;
+
+        &:disabled {
+          color: grey;
+          cursor: not-allowed;
+        }
+      }
+
+      .prev-button {
+        left: 10px;
+      }
+
+      .next-button {
+        right: 10px;
+      }
     }
 
     h3 {

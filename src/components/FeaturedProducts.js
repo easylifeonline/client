@@ -2,25 +2,11 @@ import React, { useState, useEffect } from 'react';
 import api from '../helpers/api';
 import '../styles/views/FeaturedProducts.scss';
 import QuickViewModal from './QuickViewModal';
-import { importedImages } from '../helpers/importImages';
 
 const FeaturedProducts = ({ title, type }) => {
   const [products, setProducts] = useState([]);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const token = localStorage.getItem('access_token');
-
-  const getPathFromUrl = (inputImg) => {
-    if (inputImg === null) {
-      return null;
-    }
-  
-    try {
-      const parsedUrl = new URL(inputImg);
-      return parsedUrl.pathname.split('/').pop();
-    } catch (e) {
-      return inputImg.split('/').pop();
-    }
-  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -53,18 +39,17 @@ const FeaturedProducts = ({ title, type }) => {
       {products.length > 0 ? (
         <div className="products-grid">
           {products.map((product) => (
-            <div key={product.id} className="product-item">
-              <img src={importedImages[getPathFromUrl(product.image)]} alt={product.title} />
-              <h3>{product.title}</h3>
-              <p>${product.price}</p>
-              <button onClick={() => handleQuickView(product)}>Quick View</button>
-            </div>
+            <ProductItem
+              key={product.id}
+              product={product}
+              onQuickView={handleQuickView}
+            />
           ))}
         </div>
       ) : (
         <div className="no-products">
           <img src="/images/coming.png" alt="Coming Soon" />
-          <p>No products available at the moment. Check back later!</p>
+          {/* <p>No products available at the moment. Check back later!</p> */}
         </div>
       )}
       {quickViewProduct && (
@@ -74,6 +59,51 @@ const FeaturedProducts = ({ title, type }) => {
         />
       )}
     </section>
+  );
+};
+
+const ProductItem = ({ product, onQuickView }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleNextImage = () => {
+    if (currentImageIndex < product.images.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1);
+    }
+  };
+
+  const handlePrevImage = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex(currentImageIndex - 1);
+    }
+  };
+
+  return (
+    <div className="product-item">
+      <div className="image-container">
+        {product.images.length > 1 && (
+          <button
+            className="prev-button"
+            onClick={handlePrevImage}
+            disabled={currentImageIndex === 0}
+          >
+            &lt;
+          </button>
+        )}
+        <img src={product.images[currentImageIndex]?.image} alt={product.title} />
+        {product.images.length > 1 && (
+          <button
+            className="next-button"
+            onClick={handleNextImage}
+            disabled={currentImageIndex === product.images.length - 1}
+          >
+            &gt;
+          </button>
+        )}
+      </div>
+      <h3>{product.title}</h3>
+      <p>${product.price}</p>
+      <button onClick={() => onQuickView(product)}>Quick View</button>
+    </div>
   );
 };
 

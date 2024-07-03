@@ -28,11 +28,41 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
 
-      img {
-        width: 200%;
-        height: auto;
-        border-bottom: 1px solid #ccc;
-        margin-bottom: 10px;
+      .image-container {
+        position: relative;
+
+        img {
+          width: 100%;
+          height: auto;
+          border-bottom: 1px solid #ccc;
+          margin-bottom: 10px;
+        }
+
+        .prev-button,
+        .next-button {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: none;
+          border: none;
+          font-size: 2rem;
+          color: green;
+          cursor: pointer;
+          font-weight: bold;
+
+          &:disabled {
+            color: grey;
+            cursor: not-allowed;
+          }
+        }
+
+        .prev-button {
+          left: 10px;
+        }
+
+        .next-button {
+          right: 10px;
+        }
       }
 
       h3 {

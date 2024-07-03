@@ -5,8 +5,6 @@ import { useUser } from './UserContext';
 import '../styles/views/ProductList.scss';
 import { FaBoxOpen, FaImage } from 'react-icons/fa';
 import PopupDeleteUser from './PopupDeleteUser';
-import { importedImages } from '../helpers/importImages'; 
-import getPathFromUrl from '../helpers/getPathFromUrl';
 
 const ProductList = () => {
   const { user } = useUser();
@@ -74,7 +72,7 @@ const ProductList = () => {
               <div key={product.id} className="product-item">
                 {product.image ? (
                   <React.Fragment>
-                    <img src={importedImages[getPathFromUrl(product.image)]} alt={product.title} className="product-image" />
+                    <img src={product.image} alt={product.title} className="product-image" />
                   </React.Fragment>
                 ) : (
                   <div className="product-image-placeholder">

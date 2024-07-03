@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import '../styles/views/QuickViewModal.scss';
-import getPathFromUrl from '../helpers/getPathFromUrl';
-import { importedImages } from '../helpers/importImages';
 import { useUser } from './UserContext';
 import { useCart } from '../contexts/CartContext';
 import api from '../helpers/api';
@@ -10,6 +8,7 @@ const QuickViewModal = ({ product, onClose }) => {
   const { user } = useUser();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleAddToCart = async () => {
     if (user) {
@@ -40,7 +39,7 @@ const QuickViewModal = ({ product, onClose }) => {
           product: {
             id: product.id,
             title: product.title,
-            image: product.image,
+            image: product.images[currentImageIndex]?.image,
             price: product.price
           },
           quantity: quantity,
@@ -54,13 +53,45 @@ const QuickViewModal = ({ product, onClose }) => {
     }
   };
 
+  const handleNextImage = () => {
+    if (currentImageIndex < product.images.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1);
+    }
+  };
+
+  const handlePrevImage = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex(currentImageIndex - 1);
+    }
+  };
+
   return (
     <div className="quick-view-modal">
       <div className="modal-content">
         <button className="close-button" onClick={onClose}>
           X
         </button>
-        <img src={importedImages[getPathFromUrl(product.image)]} alt={product.title} />
+        <div className="image-container">
+          {product.images.length > 1 && (
+            <button
+              className="prev-button"
+              onClick={handlePrevImage}
+              disabled={currentImageIndex === 0}
+            >
+              &lt;
+            </button>
+          )}
+          <img src={product.images[currentImageIndex]?.image} alt={product.title} />
+          {product.images.length > 1 && (
+            <button
+              className="next-button"
+              onClick={handleNextImage}
+              disabled={currentImageIndex === product.images.length - 1}
+            >
+              &gt;
+            </button>
+          )}
+        </div>
         <h3>{product.title}</h3>
         <p>{product.description}</p>
         <p>Price: ${product.price}</p>
